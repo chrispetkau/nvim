@@ -19,4 +19,4 @@ git submodule add https://github.com/nvim-telescope/telescope-ui-select.nvim.git
 git submodule add https://github.com/nvim-telescope/telescope.nvim.git pack/third_party/start/telescope
 git submodule add https://github.com/folke/trouble.nvim.git pack/third_party/start/trouble
 git submodule add https://github.com/voldikss/vim-floaterm.git pack/third_party/start/vim-floaterm
-
+git submodule add https://github.com/numToStr/Comment.nvim.git pack/third_party/start/Comment
