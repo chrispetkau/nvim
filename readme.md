@@ -1,6 +1,6 @@
 #Installation
-There are additional installation steps after cloning https://github.com/chrispetkau/nvim.git.
-1. Run git_add_submodules.bat to install all Neovim packages.
+1. Clone with `git clone https://github.com/chrispetkau/nvim.git --recurse-submodules`. This installs all Neovim
+plugins.
 2. Install ripgrep (fast regular expression utility) to support ... Telescope?.
 3. Install [Zig](https://ziglang.org/download/) (for compiling parsers for Treesitter). Add its install path to your 
 Path Environment Variable.
