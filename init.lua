@@ -2,17 +2,6 @@
 -- To reload init.lua from within Neovim: >:source $MYVIMRC
 -- To change "projects" from within Neovim you can change its root directory: >:cd c:\klei\rotwood\data\script
 --
--- TODO
--- : Navigate directly to a tab somehow
--- : Have buffers open into new tabs by default
--- : Better display of tabs (they are too texty right now)
--- : Figure out a better UI for debug-repl.
--- : Start using a package manager.
--- : Make it so you can sync neovim environments across computers easily.
--- : Make it so another team member could easily start using your config with a minimum of reconfiguration.
--- : Completion for : commands on the command line.
--- : Factor init.lua into multiple files. It is getting to be a bit of a beast.
---
 -- FAQ
 -- Q: Why do I have to double-escape to exit a Telescope dialog?
 -- A: Because everything in Neovim is a buffer. You start the dialog in Insert mode so you can type into your grep box.
@@ -25,50 +14,20 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
--- IMPORTS
--- require('vars')      -- Variables
--- require('opts')      -- Options
--- require('keys')      -- Keymaps
--- require('plug')      -- Plugins
-
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.number = true
-vim.opt.relativenumber = true
-vim.opt.cursorline = true
-vim.opt.colorcolumn = {120}
-vim.opt.signcolumn = "yes"
---vim.opt.hover_with_actions = true
---vim.opt.auto_focus = true
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-vim.opt.wrap = false
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-vim.opt.rtp:prepend(lazypath)
-
---Set completeopt to have a better completion experience
--- :help completeopt
--- menuone: popup even when there's only one match
--- noinsert: Do not insert text until a selection is made
--- noselect: Do not select, force to select one from the menu
--- shortness: avoid showing extra messages when using completion
--- updatetime: set updatetime for CursorHold
-vim.opt.completeopt = {'menuone', 'noselect', 'noinsert'}
-vim.opt.shortmess = vim.opt.shortmess + { c = true}
-vim.api.nvim_set_option('updatetime', 300)
+require("opts").setup()
 
 -- Fixed column for diagnostics to appear
 -- Show autodiagnostic popup on cursor hover_range
 -- Goto previous / next diagnostic warning / error 
 -- Show inlay_hints more frequently 
 vim.cmd([[
-autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
+	autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
 
-" Automatically resize buffers on window resize
-autocmd VimResized * wincmd = 
+	" Automatically resize buffers on window resize
+	autocmd VimResized * wincmd = 
 
-" Auto update buffers if reloaded from outside
-autocmd FocusGained,BufEnter * :checktime
+	" Auto update buffers if reloaded from outside
+	autocmd FocusGained,BufEnter * :checktime
 ]])
 
 -- TODO either use this everywhere or not at all
