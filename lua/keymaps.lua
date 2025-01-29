@@ -31,6 +31,15 @@ function keymaps.set_lsp_keymappings(client)
 	map('n', '<leader>ao', '<cmd>lua vim.lsp.buf.outgoing_calls()<CR>', "Outgoing calls")
 end
 
+-- TODO these conflict with custom_attach(). Consolidate.
+-- 'r'efactoring keymaps.
+-- vim.keymap.set('n', "<leader>rn", function() vim.lsp.buf.rename() end)
+-- vim.keymap.set('n', "<leader>rr", function() vim.lsp.buf.references() end)
+-- vim.keymap.set('n', "<leader>rs", function() vim.lsp.buf.signature_help() end)
+-- vim.keymap.set('n', "<leader>rh", function() vim.lsp.buf.hover() end)
+-- vim.keymap.set('n', "<leader>ri", function() vim.lsp.buf.implementation() end)
+-- vim.keymap.set('n', "<c-.>", function() vim.lsp.buf.code_action() end)
+
 function keymaps.setup()
 	local util = require("util")
 
