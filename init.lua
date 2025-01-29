@@ -30,75 +30,7 @@ vim.cmd([[
 	autocmd FocusGained,BufEnter * :checktime
 ]])
 
--- TODO either use this everywhere or not at all
-local map = function(type, key, value, desc)
-	vim.api.nvim_buf_set_keymap(0, type, key, value, { noremap = true, silent = true, desc = desc });
-end
-
--- Set LSP keymaps only when an LSP attaches.
-local set_lsp_keymappings = function(client)
-	print("LSP started: " .. client.name);
-	-- TODO these were in the original copy-pasta, but I don't have these plugins
-	-- require'completion'.on_attach(client)
-	-- require'diagnostic'.on_attach(client)
-
-	-- TODO use canonical keymapping
-	-- TODO add description strings as 4th parameters so we know what they do when we :nmap.
-	map('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', "Goto declaration")
-	map('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', "Goto definition")
-	map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', "Goto references")
-	map('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', "Goto signature help")
-	map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', "Goto implementation")
-	map('n', 'gy', '<cmd>lua vim.lsp.buf.type_definition()<CR>', "Goto type definition")
-	map('n', '<leader>gw', '<cmd>lua vim.lsp.buf.document_symbol()<CR>', "Goto document symbol")
-	map('n', '<leader>gW', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>', "Goto workspace symbol")
-	map('n', '<leader>ah', '<cmd>lua vim.lsp.buf.hover()<CR>', "Hover")
-	map('n', '<leader>af', '<cmd>lua vim.lsp.buf.code_action()<CR>', "Code action")
-	map('n', '<leader>ee', '<cmd>lua vim.lsp.util.show_line_diagnostics()<CR>', "Show line diagnostics")
-	map('n', '<leader>ar', '<cmd>lua vim.lsp.buf.rename()<CR>', "Rename")
-	map('n', '<leader>=', '<cmd>lua vim.lsp.buf.formatting()<CR>', "Format")
-	map('n', '<leader>ai', '<cmd>lua vim.lsp.buf.incoming_calls()<CR>', "Incoming calls")
-	map('n', '<leader>ao', '<cmd>lua vim.lsp.buf.outgoing_calls()<CR>', "Outgoing calls")
-end
-
--- TODO
--- 2. folding?
-local lspconfig = require('lspconfig')
-lspconfig.lua_ls.setup {
-	on_attach = set_lsp_keymappings,
-	settings = {
-		Lua = {
-			diagnostics = {
-				-- Suppress the 'vim is an unrecognized global' error.
-				-- TODO would like this to apply to init.lua only.
-				globals = { 'vim' },
-			},
-		},
-	},
-}
-lspconfig.rust_analyzer.setup {
-	on_attach = set_lsp_keymappings,
-	-- Server-specific settings. See `:help lspconfig-setup`
-	settings = {
-
-	},
-}
-
-vim.api.nvim_create_autocmd("LspAttach", {
-	callback = function(args)
-		local bufnr = args.buf
-		local client = vim.lsp.get_client_by_id(args.data.client_id)
-		if client.server_capabilities.completionProvider then
-			vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
-		end
-		if client.server_capabilities.definitionProvider then
-			vim.bo[bufnr].tagfunc = "v:lua.vim.lsp.tagfunc"
-		end
-		if client.supports_method('textDocument/inlayHint') then
-			vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-		end
-	end,
-})
+require("plugins.lspconfig").setup()
 
 -- Completion Plugin Setup
 local cmp = require('cmp')
@@ -183,10 +115,6 @@ vim.diagnostic.config({
 	},
 })
 
--- 'e'rror keymaps.
-vim.keymap.set("n", "<leader>en", vim.diagnostic.goto_next)
-vim.keymap.set("n", "<leader>ep", vim.diagnostic.goto_prev)
-
 -- TODO these conflict with custom_attach(). Consolidate.
 -- 'r'efactoring keymaps.
 -- vim.keymap.set('n', "<leader>rn", function() vim.lsp.buf.rename() end)
@@ -244,23 +172,8 @@ require ('nvim-treesitter.install').compilers = { "zig" }
 -- 	},
 -- }
 
--- 'f'ind keymaps.
-local tb = require('telescope.builtin')
-vim.keymap.set('n', '<leader>o', tb.find_files, { desc = 'Telescope find files' })
-vim.keymap.set('n', '<leader>t', tb.live_grep, { desc = 'Telescope live grep' })
-vim.keymap.set('n', '<leader>fb', tb.buffers, { desc = 'Telescope buffers' })
-vim.keymap.set('n', '<leader>fh', tb.help_tags, { desc = 'Telescope help tags' })
-
--- local actions = require("telescope.actions")
-
--- FloaTerm configuration
--- 'f' for Float. TODO 'f' is for Find.
-vim.keymap.set('n', "<leader>ft", ":FloatermNew --name=myfloat --height=0.8 --width=0.7 --autoclose=2 fish <CR> ")
-vim.keymap.set('n', "t", ":FloatermToggle myfloat<CR>")
-vim.keymap.set('t', "<Esc>", "<C-\\><C-n>:q<CR>")
-vim.keymap.set('n', "<leader><Tab>", ":tabnew<CR>")
-
 -- 'c'omment keymaps: 'l'inewise or 'b'lock.
+-- TODO all keymaps go in keymaps.lua
 require('Comment').setup({
 	toggler = {
 		line = 'cl',
@@ -277,12 +190,6 @@ require('Comment').setup({
 	},
 })
 
--- Ctrl-s to save.
-vim.keymap.set("n", "<C-s>", ":w<CR>", { desc = "Save current buffer" })
-vim.keymap.set("n", "<C-S-s>", ":wa<CR>", { desc = "Save all buffers" })
-vim.keymap.set("i", "<C-s>", "<Esc>:w<CR>a", { desc = "Save current buffer" })
-vim.keymap.set("i", "<C-S-s>", "<Esc>:wa<CR>a", { desc = "Save all buffers" })
-
 -- Format on save!
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = "*.rs",
@@ -298,51 +205,6 @@ require('onedark').load()
 
 -- Decrease font size a bit so we can fit 2 120-line windows side by side.
 vim.o.guifont = "Cascadia Code:h13:#h-slight"
-
-local pickers = require('telescope.pickers')
-local finders = require('telescope.finders')
-local actions = require('telescope.actions')
-local action_state = require('telescope.actions.state')
-local conf = require('telescope.config').values
-
--- Use telescope to select from a list of options and execute an action with the selection as the argument.
--- The text box is a grep to filter options; direction keys to navigate options; enter to select.
-local function select(title, options, action)
-    pickers.new({}, {
-        prompt_title = title,
-        finder = finders.new_table {
-            results = options,
-        },
-        sorter = conf.generic_sorter({}),
-        attach_mappings = function(_, map_fn)
-            map_fn("i", "<CR>", function(prompt_bufnr)
-                local selection = action_state.get_selected_entry()
-                actions.close(prompt_bufnr)
-				action(selection.value)
-            end)
-            return true
-        end,
-    }):find()
-end
-
--- Function to create a picker for directory selection
-local function select_directory()
-	-- Define a list of directories
-	local directories = {
-		"d:/source_control_testing/rotwood/data/scripts",
-		"d:/source_control_testing/rotwood/source",
-		"c:/users/chris petkau/appdata/local/nvim",
-	}
-
-	return select("Select Directory", directories, function(directory)
-		vim.cmd("cd " .. vim.fn.fnameescape(directory))
-		-- TODO this print is not visible
-		print("Changed directory to " .. directory)
-	end)
-end
-
--- 'd'irectory change.
-vim.keymap.set("n", "<leader>cd", select_directory, { desc = "Select and change directory" })
 
 require('telescope').load_extension('dap')
 
@@ -370,39 +232,9 @@ dap.adapters.lua = {
 	-- command = "D:/source_control_testing/rotwood/foreign/tools/VSCodeLuaDebug/DebugAdapter/bin/Release/DebugAdapter.exe",
 	args = {},
 }
--- VisualStudio-style debugging keymaps
-vim.keymap.set("", "<F5>", function() dap.continue() end, { desc = "Start/continue debugging" })
-vim.keymap.set("", "<S-F5>", function() dap.terminate() end, { desc = "Stop debugging" })
-vim.keymap.set("", "<F9>", function() dap.toggle_breakpoint() end, { desc = "Toggle breakpoint" })
-vim.keymap.set("", "<F10>", function() dap.step_over() end, { desc = "Step over" })
-vim.keymap.set("", "<F11>", function() dap.step_into() end, { desc = "Step into" })
-vim.keymap.set("", "<S-F11>", function() dap.step_out() end, { desc = "Step out" })
-vim.keymap.set("", "<F7>", function() dap.repl.open() end, { desc = "Read-eval-print" })
 
-local dapui = require("dapui")
-dapui.setup()
+require("dapui").setup()
 
-local function focus_dap_ui_element(element)
-    for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
-        local buf = vim.api.nvim_win_get_buf(win)
-        local buf_name = vim.api.nvim_buf_get_name(buf)
-        if buf_name:match(element) then
-            vim.api.nvim_set_current_win(win)
-            return
-        end
-    end
-    print("DAP-UI element '" .. element .. "' not found")
-end
-
--- 'd'ebugger keymaps
-vim.keymap.set("n", "<leader>do", function() dapui.open() end, { desc = "Open debugger" })
-vim.keymap.set("n", "<leader>dd", function() dapui.close() end, { desc = "Close debugger" })
-vim.keymap.set("n", "<leader>dt", function() dapui.toggle() end, { desc = "Toggle debugger" })
-vim.keymap.set("n", "<leader>ds", function() focus_dap_ui_element("DAP Scopes") end, { desc = "Focus DAP-UI Scopes" })
-vim.keymap.set("n", "<leader>df", function() focus_dap_ui_element("DAP Stacks") end, { desc = "Focus DAP-UI Stacks" })
-vim.keymap.set("n", "<leader>db", function() focus_dap_ui_element("DAP Breakpoints") end, { desc = "Focus DAP-UI Breakpoints" })
-vim.keymap.set("n", "<leader>dr", function() focus_dap_ui_element("[dap-repl-3062]") end, { desc = "Focus DAP-UI REPL" })
-vim.keymap.set("n", "<leader>dc", function() focus_dap_ui_element("DAP Console") end, { desc = "Focus DAP-UI Console" })
-vim.keymap.set("n", "<leader>dw", function() focus_dap_ui_element("DAP Watches") end, { desc = "Focus DAP-UI Watches" })
+require("keymaps").setup()
 
 -- require("config.lazy")
