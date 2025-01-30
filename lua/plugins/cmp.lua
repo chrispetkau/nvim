@@ -4,6 +4,9 @@ function mod.setup()
 	-- Completion Plugin Setup
 	local cmp = require("cmp")
 	cmp.setup({
+		completion = {
+			autocomplete = false,
+		},
 		-- Enable LSP snippets
 		snippet = {
 			expand = function(args)
@@ -25,7 +28,17 @@ function mod.setup()
 			['<Tab>'] = cmp.mapping.confirm({
 				behavior = cmp.ConfirmBehavior.Insert,
 				select = true,
-			})
+			}),
+			-- Close completion menu with Esc, but stay in Insert mode
+			["<Esc>"] = cmp.mapping({
+				i = function(fallback)
+					if cmp.visible() then
+						cmp.abort()  -- Close completion menu
+					else
+						fallback()  -- Normal Esc behavior when menu is not open
+					end
+				end,
+			}, { "i", "s" }),  -- Apply to Insert and Select mode
 		},
 		-- Installed sources:
 		sources = {
