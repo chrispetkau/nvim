@@ -40,7 +40,7 @@ end
 -- vim.keymap.set('n', "<leader>ri", function() vim.lsp.buf.implementation() end)
 -- vim.keymap.set('n', "<c-.>", function() vim.lsp.buf.code_action() end)
 
--- 'c'omment keymaps: 'l'inewise or 'b'lock.
+-- Comment keymaps use 'g' as an arbitrary prefix, then '/' for linewise and '*' for block.
 function keymaps.get_comment_plugin_setup_spec()
 	return {
 		toggler = {
