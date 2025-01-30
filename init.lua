@@ -33,23 +33,7 @@ require("plugins.diagnostic").setup()
 require("plugins.treesitter").setup()
 require("plugins.debugger").setup()
 
--- 'c'omment keymaps: 'l'inewise or 'b'lock.
--- TODO all keymaps go in keymaps.lua
-require('Comment').setup({
-	toggler = {
-		line = 'cl',
-		block = 'cb',
-	},
-	opleader = {
-		line = 'cl',
-		block = 'cb',
-	},
-	extra = {
-		above = 'cO',
-		below = 'co',
-		eol = 'cA',
-	},
-})
+require('Comment').setup(require("keymaps").get_comment_plugin_setup_spec())
 
 -- Format on save!
 vim.api.nvim_create_autocmd("BufWritePre", {

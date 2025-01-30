@@ -31,7 +31,7 @@ function keymaps.set_lsp_keymappings(client)
 	map('n', '<leader>ao', '<cmd>lua vim.lsp.buf.outgoing_calls()<CR>', "Outgoing calls")
 end
 
--- TODO these conflict with custom_attach(). Consolidate.
+-- TODO these conflict with set_lsp_keymappings(). Consolidate.
 -- 'r'efactoring keymaps.
 -- vim.keymap.set('n', "<leader>rn", function() vim.lsp.buf.rename() end)
 -- vim.keymap.set('n', "<leader>rr", function() vim.lsp.buf.references() end)
@@ -39,6 +39,25 @@ end
 -- vim.keymap.set('n', "<leader>rh", function() vim.lsp.buf.hover() end)
 -- vim.keymap.set('n', "<leader>ri", function() vim.lsp.buf.implementation() end)
 -- vim.keymap.set('n', "<c-.>", function() vim.lsp.buf.code_action() end)
+
+-- 'c'omment keymaps: 'l'inewise or 'b'lock.
+function keymaps.get_comment_plugin_setup_spec()
+	return {
+		toggler = {
+			line = 'g/',
+			block = 'g*',
+		},
+		opleader = {
+			line = 'g/',
+			block = 'g*',
+		},
+		extra = {
+			above = 'g/O',
+			below = 'g/o',
+			eol = 'g/A',
+		},
+	}
+end
 
 function keymaps.setup()
 	local util = require("util")
