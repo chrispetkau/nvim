@@ -13,8 +13,8 @@ function opts.setup()
 	vim.opt.ignorecase = true
 	vim.opt.smartcase = true
 	vim.opt.wrap = false
-	local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-	vim.opt.rtp:prepend(lazypath)
+	-- local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+	-- vim.opt.rtp:prepend(lazypath)
 
 	--Set completeopt to have a better completion experience
 	-- :help completeopt

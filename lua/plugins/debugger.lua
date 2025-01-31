@@ -5,15 +5,17 @@ function debugger.setup()
 
 	local dap = require("dap")
 	vim.fn.sign_define("DapBreakpoint", { text = "●", texthl = "SignColumn", linehl = "", numhl = "" })
-	local rotwood = "D:/source_control_testing/rotwood"
+	local root = require("util").get_project_directory()
+	local executable = require("user").get_project_name() .."_steam_r"
+	local bin = root.."/bin"
 	dap.configurations.lua = {
 		{
-			name= "rotwood_steam_r [slow]",
+			name= executable.." [slow]",
 			type= "lua",
 			request= "launch",
-			workingDirectory= rotwood.."/bin",
-			sourceBasePath= rotwood.."/data",
-			executable= rotwood.."/bin/rotwood_steam_r.exe",
+			workingDirectory= bin,
+			sourceBasePath= root.."/data",
+			executable= bin.."/"..executable..".exe",
 			arguments= "-enable_lua_debugger",
 			listenPublicly= false,
 			listenPort= 56789,
@@ -23,7 +25,7 @@ function debugger.setup()
 	}
 	dap.adapters.lua = {
 		type = "executable",
-		command = rotwood.."/foreign/tools/VSCodeLuaDebug/Extension/DebugAdapter.exe",
+		command = root.."/foreign/tools/VSCodeLuaDebug/Extension/DebugAdapter.exe",
 		-- command = "D:/source_control_testing/rotwood/foreign/tools/VSCodeLuaDebug/DebugAdapter/bin/Release/DebugAdapter.exe",
 		args = {},
 	}

@@ -44,17 +44,17 @@ end
 function keymaps.get_comment_plugin_setup_spec()
 	return {
 		toggler = {
-			line = 'g/',
-			block = 'g*',
+			line = 'gc',
+			block = 'gb',
 		},
 		opleader = {
-			line = 'g/',
-			block = 'g*',
+			line = 'gc',
+			block = 'gb',
 		},
 		extra = {
-			above = 'g/O',
-			below = 'g/o',
-			eol = 'g/A',
+			above = 'gO',
+			below = 'go',
+			eol = 'gA',
 		},
 	}
 end

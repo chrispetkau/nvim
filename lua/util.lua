@@ -40,18 +40,27 @@ end
 
 -- Function to create a picker for directory selection
 function util.select_directory()
-	-- Define a list of directories
-	local directories = {
-		"d:/source_control_testing/rotwood/data/scripts",
-		"d:/source_control_testing/rotwood/source",
-		"c:/users/chris petkau/appdata/local/nvim",
-	}
-
-	return util.select("Select Directory", directories, function(directory)
+	return util.select("Select Directory", require("user").get_project_directories(), function(directory)
 		vim.cmd("cd " .. vim.fn.fnameescape(directory))
 		-- TODO this print is not visible
 		print("Changed directory to " .. directory)
 	end)
+end
+
+function util.get_project_directory()
+	local user = require("user")
+	return user.get_klei_directory().."/"..user.get_project_install_name()
+end
+
+function util.get_standard_directories()
+	local user = require("user")
+	local project = util.get_project_directory()
+	return {
+		project.."/data/scripts",
+		project.."/source",
+		user.get_klei_directory(),
+		"c:/users/"..user.get_user_name().."/appdata/local/nvim",
+	}
 end
 
 return util
