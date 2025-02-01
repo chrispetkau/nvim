@@ -62,6 +62,9 @@ end
 function keymaps.setup()
 	local util = require("util")
 
+	-- 'b'uffer, 'o'nly current.
+	vim.keymap.set("n", "<leader>bo", ":%bd|e#|bd#<CR>", { desc = "Close all buffers except current" })
+
 	-- 'f'ind keymaps.
 	local tb = require('telescope.builtin')
 	vim.keymap.set('n', '<leader>o', tb.find_files, { desc = 'Telescope find files' })
@@ -90,7 +93,12 @@ function keymaps.setup()
 	vim.keymap.set("n", "<C-S-s>", ":wa<CR>", { desc = "Save all buffers" })
 	vim.keymap.set("i", "<C-s>", "<Esc>:w<CR>a", { desc = "Save current buffer" })
 	vim.keymap.set("i", "<C-S-s>", "<Esc>:wa<CR>a", { desc = "Save all buffers" })
-	
+
+	-- Standard chords for cut'n'paste from clipboard.
+	vim.keymap.set("n", "<C-c>", "\"+y", { desc = "Copy clipboard" })
+	vim.keymap.set("n", "<C-x>", "\"+d", { desc = "Cut clipboard" })
+	vim.keymap.set("n", "<C-v>", "\"+p", { desc = "Paste clipboard" })
+
 	-- VisualStudio-style debugging keymaps
 	local dap = require("dap")
 	vim.keymap.set("", "<F5>", function() dap.continue() end, { desc = "Start/continue debugging" })
@@ -100,7 +108,7 @@ function keymaps.setup()
 	vim.keymap.set("", "<F11>", function() dap.step_into() end, { desc = "Step into" })
 	vim.keymap.set("", "<S-F11>", function() dap.step_out() end, { desc = "Step out" })
 	vim.keymap.set("", "<F7>", function() dap.repl.open() end, { desc = "Read-eval-print" })
-	
+
 	-- 'd'ebugger keymaps
 	local dapui = require("dapui")
 	vim.keymap.set("n", "<leader>do", function() dapui.open() end, { desc = "Open debugger" })
