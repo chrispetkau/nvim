@@ -26,6 +26,15 @@ function opts.setup()
 	vim.opt.completeopt = {'menuone', 'noselect', 'noinsert'}
 	vim.opt.shortmess = vim.opt.shortmess + { c = true}
 	vim.api.nvim_set_option('updatetime', 300)
+
+	-- Enable Treesitter-based folding
+	vim.opt.foldmethod = "expr"
+	vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+
+	-- Ensure folds start open
+	vim.opt.foldenable = true
+	vim.opt.foldlevel = 99
+	vim.opt.foldlevelstart = 99
 end
 
 return opts

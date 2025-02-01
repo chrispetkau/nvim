@@ -6,19 +6,23 @@ function treesitter.setup()
 
 	-- TODO I would like to specify parsers that should be automatically installed but I get a lot of warnings with this
 	-- spec as written.
-	-- require'nvim-treesitter.configs'.setup {
-	-- 	-- A list of parser names, or "all" (the listed parsers MUST always be installed)
-	-- 	ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline" },
-	--
-	-- 	-- Install parsers synchronously (only applied to `ensure_installed`)
-	-- 	sync_install = false,
-	--
-	-- 	-- Automatically install missing parsers when entering buffer
-	-- 	-- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-	-- 	auto_install = true,
-	--
-	-- 	-- List of parsers to ignore installing (or "all")
-	-- 	ignore_install = { "javascript" },
+	require'nvim-treesitter.configs'.setup {
+		-- A list of parser names, or "all" (the listed parsers MUST always be installed)
+		ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline", "c_sharp", "rust", },
+
+		-- Install parsers synchronously (only applied to `ensure_installed`)
+		sync_install = false,
+
+		-- Automatically install missing parsers when entering buffer
+		-- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
+		auto_install = true,
+
+		-- List of parsers to ignore installing (or "all")
+		ignore_install = { "javascript" },
+
+		highlight = { enable = true },
+		indent = { enable = true },
+		fold = { enable = true },  -- Enable Treesitter-based folding
 	--
 	-- 	---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
 	-- 	-- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
@@ -47,7 +51,7 @@ function treesitter.setup()
 	-- 			additional_vim_regex_highlighting = false,
 	-- 		},
 	-- 	},
-	-- }
+	}
 end
 
 return treesitter
