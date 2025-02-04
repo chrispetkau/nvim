@@ -13,11 +13,8 @@ vim.g.maplocalleader = "\\"
 
 require("opts").setup()
 
--- Fixed column for diagnostics to appear
--- Show autodiagnostic popup on cursor hover_range
--- Goto previous / next diagnostic warning / error 
--- Show inlay_hints more frequently 
 vim.cmd([[
+	" Show error when cursor is on it
 	autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
 
 	" Automatically resize buffers on window resize
@@ -25,6 +22,12 @@ vim.cmd([[
 
 	" Auto update buffers if reloaded from outside
 	autocmd FocusGained,BufEnter * :checktime
+
+	" Format *.rs files on save
+	autocmd BufWritePre *.rs lua vim.lsp.buf.format({ async = false })
+
+	" Keep folds open after saving
+	autocmd BufWritePost * silent! mkview | silent! loadview
 ]])
 
 require("plugins.lspconfig").setup()
@@ -34,14 +37,6 @@ require("plugins.treesitter").setup()
 require("plugins.debugger").setup()
 
 require('Comment').setup(require("keymaps").get_comment_plugin_setup_spec())
-
--- Format on save!
-vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = "*.rs",
-	callback = function()
-		vim.lsp.buf.format({ async = false })
-	end
-})
 
 require('onedark').setup {
 	style = 'darker'

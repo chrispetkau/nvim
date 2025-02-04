@@ -5,6 +5,7 @@ function mod.setup()
 	local cmp = require("cmp")
 	cmp.setup({
 		completion = {
+			-- Make this true to use manual completion only, via Ctrl-Space.
 			autocomplete = false,
 		},
 		-- Enable LSP snippets
@@ -16,14 +17,9 @@ function mod.setup()
 		mapping = {
 			['<Up>'] = cmp.mapping.select_prev_item(),
 			['<Down>'] = cmp.mapping.select_next_item(),
-			-- ['<C-p>'] = cmp.mapping.select_prev_item(),
-			-- ['<C-n>'] = cmp.mapping.select_next_item(),
-			-- Add tab support
-			-- ['<S-Tab>'] = cmp.mapping.select_prev_item(),
-			-- ['<Tab>'] = cmp.mapping.select_next_item(),
 			['<C-S-f>'] = cmp.mapping.scroll_docs(-4),
 			['<C-f>'] = cmp.mapping.scroll_docs(4),
-			['<C-Space>'] = cmp.mapping.complete(),
+			['<C-Space>'] = cmp.mapping.complete(), -- So this complete() is actually to open the completion dialog.
 			['<C-e>'] = cmp.mapping.close(),
 			['<Tab>'] = cmp.mapping.confirm({
 				behavior = cmp.ConfirmBehavior.Insert,

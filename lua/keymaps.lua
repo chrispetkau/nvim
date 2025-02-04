@@ -14,33 +14,33 @@ function keymaps.set_lsp_keymappings(client)
 
 	-- TODO use canonical keymapping
 	-- TODO add description strings as 4th parameters so we know what they do when we :nmap.
-	map('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', "Goto declaration")
-	map('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', "Goto definition")
-	map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', "Goto references")
-	map('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', "Goto signature help")
-	map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', "Goto implementation")
-	map('n', 'gy', '<cmd>lua vim.lsp.buf.type_definition()<CR>', "Goto type definition")
+
+	-- 'g'o
+	map('n', '<leader>gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', "Goto declaration")
+	map('n', '<leader>gd', '<cmd>lua vim.lsp.buf.definition()<CR>', "Goto definition")
+	map('n', '<leader>gr', '<cmd>lua vim.lsp.buf.references()<CR>', "Goto references")
+	map('n', '<leader>gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', "Goto signature help")
+	map('n', '<leader>gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', "Goto implementation")
+	map('n', '<leader>gy', '<cmd>lua vim.lsp.buf.type_definition()<CR>', "Goto type definition")
 	map('n', '<leader>gw', '<cmd>lua vim.lsp.buf.document_symbol()<CR>', "Goto document symbol")
 	map('n', '<leader>gW', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>', "Goto workspace symbol")
+
+	-- code 'a'ction
 	map('n', '<leader>ah', '<cmd>lua vim.lsp.buf.hover()<CR>', "Hover")
-	map('n', '<leader>af', '<cmd>lua vim.lsp.buf.code_action()<CR>', "Code action")
-	map('n', '<leader>ee', '<cmd>lua vim.lsp.util.show_line_diagnostics()<CR>', "Show line diagnostics")
+	map('n', '<leader>af', '<cmd>lua require("util").select_code_action()<CR>', "Code action")
 	map('n', '<leader>ar', '<cmd>lua vim.lsp.buf.rename()<CR>', "Rename")
-	map('n', '<leader>=', '<cmd>lua vim.lsp.buf.formatting()<CR>', "Format")
 	map('n', '<leader>ai', '<cmd>lua vim.lsp.buf.incoming_calls()<CR>', "Incoming calls")
 	map('n', '<leader>ao', '<cmd>lua vim.lsp.buf.outgoing_calls()<CR>', "Outgoing calls")
+
+	-- 'e'rror
+	-- TODO delete once verified unneeded...this popup shows on hover already but this command moves the cursor into
+	-- it...do we need that functionality?
+	-- map('n', '<leader>ee', '<cmd>lua vim.diagnostic.open_float()<CR>', "Show line diagnostics")
+
+	map('n', '<leader>=', '<cmd>lua vim.lsp.buf.formatting()<CR>', "Format")
 end
 
--- TODO these conflict with set_lsp_keymappings(). Consolidate.
--- 'r'efactoring keymaps.
--- vim.keymap.set('n', "<leader>rn", function() vim.lsp.buf.rename() end)
--- vim.keymap.set('n', "<leader>rr", function() vim.lsp.buf.references() end)
--- vim.keymap.set('n', "<leader>rs", function() vim.lsp.buf.signature_help() end)
--- vim.keymap.set('n', "<leader>rh", function() vim.lsp.buf.hover() end)
--- vim.keymap.set('n', "<leader>ri", function() vim.lsp.buf.implementation() end)
--- vim.keymap.set('n', "<c-.>", function() vim.lsp.buf.code_action() end)
-
--- Comment keymaps use 'g' as an arbitrary prefix, then '/' for linewise and '*' for block.
+-- Comment keymaps use 'g' as an arbitrary prefix, then 'c' for linewise and 'b' for block.
 function keymaps.get_comment_plugin_setup_spec()
 	return {
 		toggler = {
@@ -62,30 +62,37 @@ end
 function keymaps.setup()
 	local util = require("util")
 
-	-- 'b'uffer, 'o'nly current.
-	vim.keymap.set("n", "<leader>bo", ":%bd|e#|bd#<CR>", { desc = "Close all buffers except current" })
+	vim.keymap.set("n", "<leader>us", function() util.source_all() end, { desc = "Close all buffers except current" })
+
+	-- 'w'indow operation
+	vim.keymap.set("n", "<leader>w", "<C-w>", { desc = "Window operation" })
+
+	-- 'g'o 'g'it
+	vim.keymap.set("n", "<leader>gg", ":G<CR>", { desc = "Git (Fugitive)" })
+
+	-- 'b'uffer
+	vim.keymap.set("n", "<leader>bo", ":%bd|e#|bd#<CR>", { desc = "Close all buffers except current" }) -- buffer only
+	vim.keymap.set("n", "<leader>bd", ":bd<CR>", { desc = "Close all buffers except current" })
 
 	-- 'f'ind keymaps.
 	local tb = require('telescope.builtin')
-	vim.keymap.set('n', '<leader>o', tb.find_files, { desc = 'Telescope find files' })
-	vim.keymap.set('n', '<leader>t', tb.live_grep, { desc = 'Telescope live grep' })
+	vim.keymap.set('n', '<leader>ff', tb.find_files, { desc = 'Telescope find files' })
+	vim.keymap.set('n', '<leader>fg', tb.live_grep, { desc = 'Telescope live grep' })
 	vim.keymap.set('n', '<leader>fb', tb.buffers, { desc = 'Telescope buffers' })
 	vim.keymap.set('n', '<leader>fh', tb.help_tags, { desc = 'Telescope help tags' })
+	vim.keymap.set("n", "<leader>fd", util.select_directory, { desc = "Select and change directory" })
 
 	-- local actions = require("telescope.actions")
-
-	-- 'd'irectory change.
-	vim.keymap.set("n", "<leader>cd", util.select_directory, { desc = "Select and change directory" })
 
 	-- 'e'rror keymaps.
 	vim.keymap.set("n", "<leader>en", vim.diagnostic.goto_next)
 	vim.keymap.set("n", "<leader>ep", vim.diagnostic.goto_prev)
 
-	-- FloaTerm configuration
-	-- 'f' for Float. TODO 'f' is for Find.
-	vim.keymap.set('n', "<leader>ft", ":FloatermNew --name=myfloat --height=0.8 --width=0.7 --autoclose=2 fish <CR> ")
-	vim.keymap.set('n', "t", ":FloatermToggle myfloat<CR>")
+	-- 't'erminal
+	vim.keymap.set('n', "<leader>to", ":FloatermNew --name=myfloat --height=0.8 --width=0.7 --autoclose=2<CR> ")
+	vim.keymap.set('n', "<leader>tt", ":FloatermToggle myfloat<CR>")
 	vim.keymap.set('t', "<Esc>", "<C-\\><C-n>:q<CR>")
+
 	vim.keymap.set('n', "<leader><Tab>", ":tabnew<CR>")
 
 	-- Ctrl-s to save.
@@ -117,7 +124,7 @@ function keymaps.setup()
 	vim.keymap.set("n", "<leader>ds", function() util.focus_dap_ui_element("DAP Scopes") end, { desc = "Focus DAP-UI Scopes" })
 	vim.keymap.set("n", "<leader>df", function() util.focus_dap_ui_element("DAP Stacks") end, { desc = "Focus DAP-UI Stacks" })
 	vim.keymap.set("n", "<leader>db", function() util.focus_dap_ui_element("DAP Breakpoints") end, { desc = "Focus DAP-UI Breakpoints" })
-	vim.keymap.set("n", "<leader>dr", function() util.focus_dap_ui_element("[dap-repl-3062]") end, { desc = "Focus DAP-UI REPL" })
+	-- TODO vim.keymap.set("n", "<leader>dr", function() util.focus_dap_ui_element("[dap-repl-3062]") end, { desc = "Focus DAP-UI REPL" })
 	vim.keymap.set("n", "<leader>dc", function() util.focus_dap_ui_element("DAP Console") end, { desc = "Focus DAP-UI Console" })
 	vim.keymap.set("n", "<leader>dw", function() util.focus_dap_ui_element("DAP Watches") end, { desc = "Focus DAP-UI Watches" })
 end

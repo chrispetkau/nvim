@@ -1,5 +1,13 @@
 local util = {}
 
+function util.source_all()
+	print("util.source_all")
+	for name, _ in pairs(package.loaded) do
+		package.loaded[name] = nil
+	end
+	vim.cmd("source " .. vim.env.MYVIMRC)
+end
+
 function util.focus_dap_ui_element(element)
     for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
         local buf = vim.api.nvim_win_get_buf(win)
@@ -45,6 +53,85 @@ function util.select_directory()
 		-- TODO this print is not visible
 		print("Changed directory to " .. directory)
 	end)
+end
+
+function util.select_code_action()
+	vim.lsp.buf.code_action()
+    --[[ local params = vim.lsp.util.make_range_params()
+    params.context = {
+		apply = false,
+		-- only = { "quickfix", }, -- Optional filters
+		only = { "source", "quickfix", "refactor" }, -- Optional filters
+		diagnostics = vim.diagnostic.get(0),
+		-- diagnostics = vim.lsp.diagnostic.get_line_diagnostics(),
+	}
+	vim.lsp.buf_request_all(0, "textDocument/codeAction", params, function(response_messages)
+		local function handle_response(response_message)
+			local err = response_message.error
+			if err then
+				print(err.message or "Error message for non-nil error is nil!?!?")
+				return
+			end
+			local code_actions = response_message.result
+			if not code_actions or vim.tbl_isempty(code_actions) then
+				print("No available code actions")
+				return
+			end
+
+			-- Extract action titles
+			local options = {}
+			for i, action in ipairs(code_actions) do
+				options[i] = action.title
+			end
+
+			local function execute_action(action)
+				if action.edit then
+					print("execute_action: edit")
+					vim.lsp.util.apply_workspace_edit(action.edit, ctx.client_id)
+				end
+				if action.command then
+					print("Execute code action: "..action.title)
+					vim.lsp.buf.execute_command(action.command)
+				else
+					print("Failed to execute code action: "..action.title)
+				end
+				-- -- If the action contains edits, apply them
+				-- if action.edit then
+				-- 	print("execute_action: edit")
+				-- 	vim.lsp.util.apply_workspace_edit(action.edit, ctx.client_id)
+				-- end
+				-- -- If the action is a command, execute it
+				-- if action.command then
+				-- 	local command = action.command
+				-- 	if type(command) == "table" and command.command then
+				-- 		print("execute_action: command as table")
+				-- 		vim.lsp.buf.execute_command(command)
+				-- 	else
+				-- 		print("execute_action: command as string")
+				-- 		vim.lsp.buf.execute_command(action)
+				-- 	end
+				-- end
+				-- if action.edit or type(action.command) == "table" then
+				-- 	vim.lsp.buf.execute_command(action)
+				-- else
+				-- 	vim.lsp.buf_request(0, "workspace/executeCommand", action)
+				-- end
+			end
+
+			-- Use util.select() to present actions
+			util.select("Select Code Action", options, function(selected)
+				for _, action in ipairs(code_actions) do
+					if action.title == selected then
+						execute_action(action)
+						return
+					end
+				end
+			end)
+		end
+		for _, response_message in pairs(response_messages) do
+			handle_response(response_message)
+		end
+    end) ]]
 end
 
 function util.get_project_directory()

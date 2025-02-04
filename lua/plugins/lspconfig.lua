@@ -2,11 +2,11 @@ local lspconfig = {}
 
 function lspconfig.setup()
 	local keymaps = require("keymaps")
-	local lspconfig = require('lspconfig')
+	local lspconfig_plugin = require('lspconfig')
 
 	-- TODO
 	-- 2. folding?
-	lspconfig.lua_ls.setup {
+	lspconfig_plugin.lua_ls.setup {
 		on_attach = keymaps.set_lsp_keymappings,
 		settings = {
 			Lua = {
@@ -18,13 +18,23 @@ function lspconfig.setup()
 			},
 		},
 	}
-	lspconfig.rust_analyzer.setup {
+	lspconfig_plugin.rust_analyzer.setup {
 		on_attach = keymaps.set_lsp_keymappings,
-		-- Server-specific settings. See `:help lspconfig-setup`
 		settings = {
-
-		},
+			['rust-analyzer'] = {
+				diagnostics = {
+					enable = false
+				}
+			}
+		}
 	}
+	-- lspconfig.rust_analyzer.setup {
+	-- 	on_attach = keymaps.set_lsp_keymappings,
+	-- 	-- Server-specific settings. See `:help lspconfig-setup`
+	-- 	settings = {
+	--
+	-- 	},
+	-- }
 
 	vim.api.nvim_create_autocmd("LspAttach", {
 		callback = function(args)
