@@ -62,13 +62,10 @@ end
 function keymaps.setup()
 	local util = require("util")
 
-	vim.keymap.set("n", "<leader>us", function() util.source_all() end, { desc = "Close all buffers except current" })
+	vim.keymap.set("n", "<leader>us", function() util.source_all() end, { desc = "Re-source all" })
 
 	-- 'w'indow operation
 	vim.keymap.set("n", "<leader>w", "<C-w>", { desc = "Window operation" })
-
-	-- 'g'o 'g'it
-	vim.keymap.set("n", "<leader>gg", ":G<CR>", { desc = "Git (Fugitive)" })
 
 	-- 'b'uffer
 	vim.keymap.set("n", "<leader>bo", ":%bd|e#|bd#<CR>", { desc = "Close all buffers except current" }) -- buffer only
