@@ -95,6 +95,8 @@ function keymaps.setup()
 
 	vim.keymap.set('n', "<leader><Tab>", ":tabnew<CR>")
 
+	vim.keymap.set('i', "<C-l>", "<Esc>:nohlsearch<CR>a", { desc = "Clear search highlights from Insert mode" })
+
 	-- Ctrl-s to save.
 	vim.keymap.set("n", "<C-s>", ":w<CR>", { desc = "Save current buffer" })
 	vim.keymap.set("n", "<C-S-s>", ":wa<CR>", { desc = "Save all buffers" })
@@ -104,7 +106,7 @@ function keymaps.setup()
 	-- Standard chords for cut'n'paste from clipboard.
 	vim.keymap.set("n", "<C-c>", "\"+y", { desc = "Copy clipboard" })
 	vim.keymap.set("n", "<C-x>", "\"+d", { desc = "Cut clipboard" })
-	vim.keymap.set("n", "<C-v>", "\"+p", { desc = "Paste clipboard" })
+	vim.keymap.set("n", "<C-p", "\"+p", { desc = "Paste clipboard" }) -- Don't use <C-v> as that is Visual Block.
 
 	-- VisualStudio-style debugging keymaps
 	local dap = require("dap")
