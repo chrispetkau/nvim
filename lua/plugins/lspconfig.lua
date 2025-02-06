@@ -1,13 +1,14 @@
 local lspconfig = {}
 
+local function setup_lsp(client)
+	require("keymaps").set_lsp_keymappings(client)
+end
+
 function lspconfig.setup()
-	local keymaps = require("keymaps")
 	local lspconfig_plugin = require('lspconfig')
 
-	-- TODO
-	-- 2. folding?
 	lspconfig_plugin.lua_ls.setup {
-		on_attach = keymaps.set_lsp_keymappings,
+		on_attach = setup_lsp,
 		settings = {
 			Lua = {
 				diagnostics = {
@@ -19,7 +20,7 @@ function lspconfig.setup()
 		},
 	}
 	lspconfig_plugin.rust_analyzer.setup {
-		on_attach = keymaps.set_lsp_keymappings,
+		on_attach = setup_lsp,
 		settings = {
 			['rust-analyzer'] = {
 				diagnostics = {
@@ -30,7 +31,7 @@ function lspconfig.setup()
 	}
 	require("roslyn").setup({
 		config = {
-			on_attach = require("keymaps").set_lsp_keymappings,
+			on_attach = setup_lsp,
 			settings = {
 				["csharp|inlay_hints"] = {
 					csharp_enable_inlay_hints_for_implicit_object_creation = true,
@@ -65,6 +66,9 @@ function lspconfig.setup()
 			end
 			if client.supports_method('textDocument/inlayHint') then
 				vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+			end
+			if client.supports_method('textDocument/foldingRange') then
+				vim.opt.foldexpr = "v:lua.vim.lsp.foldexpr()"
 			end
 		end,
 	})
