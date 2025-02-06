@@ -28,6 +28,9 @@ vim.cmd([[
 
 	" Keep folds open after saving
 	autocmd BufWritePost * silent! mkview | silent! loadview
+
+	" Add some keymaps specific to Fugitive buffers.
+	autocmd FileType fugitive lua require("keymaps").install_fugitive_keymaps()
 ]])
 
 require("plugins.lspconfig").setup()

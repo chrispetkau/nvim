@@ -59,6 +59,16 @@ function keymaps.get_comment_plugin_setup_spec()
 	}
 end
 
+function keymaps.install_fugitive_keymaps()
+	-- vim.keymap.set("n", "dv", function()
+	-- 	local file = vim.fn.expand("<cfile>") -- Get the file under the cursor
+	-- 	if file ~= "" then
+	-- 		vim.cmd("tab Git diff " .. vim.fn.fnameescape(file)) -- Open in a new tab
+	-- 	end
+	-- end, { buffer = true, silent = true })
+	-- map('n', 'q', '<cmd>:tabclose<CR>', "Close Fugitive diffsplit tab")
+end
+
 function keymaps.setup()
 	local util = require("util")
 
@@ -101,9 +111,9 @@ function keymaps.setup()
 	vim.keymap.set("i", "<C-S-s>", "<Esc>:wa<CR>a", { desc = "Save all buffers" })
 
 	-- Standard chords for cut'n'paste from clipboard.
-	vim.keymap.set("n", "<C-c>", "\"+y", { desc = "Copy clipboard" })
-	vim.keymap.set("n", "<C-x>", "\"+d", { desc = "Cut clipboard" })
-	vim.keymap.set("n", "<C-p>", "\"+p", { desc = "Paste clipboard" }) -- Don't use <C-v> as that is Visual Block.
+	vim.keymap.set("v", "<C-c>", '"+y', { desc = "Copy clipboard" })
+	vim.keymap.set("v", "<C-x>", '"+d', { desc = "Cut clipboard" })
+	vim.keymap.set({"n", "v"}, "<C-p>", '"+p', { desc = "Paste clipboard" }) -- Don't use <C-v> as that is Visual Block.
 
 	-- VisualStudio-style debugging keymaps
 	local dap = require("dap")
