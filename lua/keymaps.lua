@@ -106,7 +106,7 @@ function keymaps.setup()
 	-- Standard chords for cut'n'paste from clipboard.
 	vim.keymap.set("n", "<C-c>", "\"+y", { desc = "Copy clipboard" })
 	vim.keymap.set("n", "<C-x>", "\"+d", { desc = "Cut clipboard" })
-	vim.keymap.set("n", "<C-p", "\"+p", { desc = "Paste clipboard" }) -- Don't use <C-v> as that is Visual Block.
+	vim.keymap.set("n", "<C-p>", "\"+p", { desc = "Paste clipboard" }) -- Don't use <C-v> as that is Visual Block.
 
 	-- VisualStudio-style debugging keymaps
 	local dap = require("dap")

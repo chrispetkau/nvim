@@ -8,6 +8,7 @@ Path Environment Variable.
 Variable.
 5. Install lua-language-server for Lua language server protocol support. Add its install path to your Path Environment 
 Variable.
+6. Install the Roslyn C# LSP binaries in nvim-data as per the ["Installation: Manually"](https://github.com/seblyng/roslyn.nvim).
 
 # Tips
 1. Use a Vim tutorial to learn the basics. Easiest thing is to just type `:Tutor` from within Neovim.
