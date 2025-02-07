@@ -29,6 +29,11 @@ vim.cmd([[
 	" Keep folds open after saving
 	autocmd BufWritePost * silent! mkview | silent! loadview
 
+	" Re-source Neovim configuration Lua files.
+	" ** means any sub-folder.
+	" <afile> is file that triggered the event.
+	autocmd BufWritePost ~/.config/nvim/**/*.lua source <afile>
+
 	" Add some keymaps specific to Fugitive buffers.
 	autocmd FileType fugitive lua require("keymaps").install_fugitive_keymaps()
 ]])
