@@ -8,9 +8,15 @@ set file=%1
 if defined file (
     :: Send the file to the server.
     call nvim --server %servername% --remote-silent %*
+
+	:: Give Neovim a moment to receive the file.
+	timeout /t 1 >nul
+
+	:: Give focus to Neovim.
+    powershell -Command "(Get-Process -Name neovide -ErrorAction SilentlyContinue | ForEach-Object { (New-Object -ComObject WScript.Shell).AppActivate($_.MainWindowTitle) })"
 ) else (
-    :: Start the server.
-    call neovide.exe --maximized %* -- --listen %servername% %session%
+    :: Start the server, hiding the command window that initiates it.
+    start "" neovide.exe --maximized %* -- --listen %servername% %session%
 )
 
 :: You can use Regedit to forward file-opens that are associated with Neovide to this cmd.
