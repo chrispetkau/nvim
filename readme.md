@@ -9,6 +9,8 @@ Variable.
 5. Install lua-language-server for Lua language server protocol support. Add its install path to your Path Environment 
 Variable.
 6. Install the Roslyn C# LSP binaries in nvim-data as per the ["Installation: Manually"](https://github.com/seblyng/roslyn.nvim).
+7. Add a shortcut to send_to_server.cmd to your Startup folder.
+8. Use Regedit to forward Neovide file associations to send_to_server.
 
 # Tips
 1. Use a Vim tutorial to learn the basics. Easiest thing is to just type `:Tutor` from within Neovim.
