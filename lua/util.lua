@@ -1,13 +1,5 @@
 local util = {}
 
-function util.source_all()
-	print("util.source_all")
-	for name, _ in pairs(package.loaded) do
-		package.loaded[name] = nil
-	end
-	vim.cmd("source " .. vim.env.MYVIMRC)
-end
-
 function util.focus_dap_ui_element(element)
     for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
         local buf = vim.api.nvim_win_get_buf(win)
@@ -49,6 +41,7 @@ end
 -- Function to create a picker for directory selection
 function util.select_directory()
 	return util.select("Select Directory", require("user").get_project_directories(), function(directory)
+		-- TODO modify this so we can use it with :wcd and :tcd for window-local and tab-local directories respectively
 		vim.cmd("cd " .. vim.fn.fnameescape(directory))
 		-- TODO this print is not visible
 		print("Changed directory to " .. directory)

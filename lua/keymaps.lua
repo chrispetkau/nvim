@@ -2,7 +2,7 @@ local keymaps = {}
 
 -- TODO either use this everywhere or not at all
 local map = function(type, key, value, desc)
-	vim.api.nvim_buf_set_keymap(0, type, key, value, { noremap = true, silent = true, desc = desc });
+	vim.api.nvim_buf_set_keymap(0, type, key, value, { noremap = true, silent = true, desc = desc })
 end
 
 -- Set LSP keymaps only when an LSP attaches.
@@ -16,14 +16,14 @@ function keymaps.set_lsp_keymappings(client)
 	-- TODO add description strings as 4th parameters so we know what they do when we :nmap.
 
 	-- 'g'o
-	map('n', '<leader>gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', "Goto declaration")
-	map('n', '<leader>gd', '<cmd>lua vim.lsp.buf.definition()<CR>', "Goto definition")
-	map('n', '<leader>gr', '<cmd>lua vim.lsp.buf.references()<CR>', "Goto references")
-	map('n', '<leader>gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', "Goto signature help")
-	map('n', '<leader>gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', "Goto implementation")
-	map('n', '<leader>gy', '<cmd>lua vim.lsp.buf.type_definition()<CR>', "Goto type definition")
-	map('n', '<leader>gw', '<cmd>lua vim.lsp.buf.document_symbol()<CR>', "Goto document symbol")
-	map('n', '<leader>gW', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>', "Goto workspace symbol")
+	map('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', "Goto declaration")
+	map('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', "Goto definition")
+	map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', "Goto references")
+	map('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', "Goto signature help")
+	map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', "Goto implementation")
+	map('n', 'gy', '<cmd>lua vim.lsp.buf.type_definition()<CR>', "Goto type definition")
+	map('n', 'gw', '<cmd>lua vim.lsp.buf.document_symbol()<CR>', "Goto document symbol")
+	map('n', 'gW', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>', "Goto workspace symbol")
 
 	-- code 'a'ction
 	map('n', '<leader>ah', '<cmd>lua vim.lsp.buf.hover()<CR>', "Hover")
@@ -60,6 +60,7 @@ function keymaps.get_comment_plugin_setup_spec()
 end
 
 function keymaps.install_fugitive_keymaps()
+	vim.api.nvim_buf_set_keymap(0, 'n', 'dv', 'O:Gdiffsplit<CR>', { noremap = false, silent = true })
 	-- vim.keymap.set("n", "dv", function()
 	-- 	local file = vim.fn.expand("<cfile>") -- Get the file under the cursor
 	-- 	if file ~= "" then
@@ -71,8 +72,6 @@ end
 
 function keymaps.setup()
 	local util = require("util")
-
-	vim.keymap.set("n", "<leader>us", function() util.source_all() end, { desc = "Re-source all" })
 
 	-- 'w'indow operation
 	vim.keymap.set("n", "<leader>w", "<C-w>", { desc = "Window operation" })
