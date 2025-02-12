@@ -65,7 +65,7 @@
 	path = pack/third_party/start/vim-floaterm
 	url = https://github.com/voldikss/vim-floaterm.git
 [submodule "pack/third_party/start/Comment"]
-	path = pack/third_party/start/Comment
+	path = pack/third_party/start/Comment.nvim
 	url = https://github.com/numToStr/Comment.nvim.git
 [submodule "pack/third_party/start/roslyn.nvim"]
 	path = pack/third_party/start/roslyn.nvim
