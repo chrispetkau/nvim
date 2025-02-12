@@ -8,6 +8,18 @@ function debugger.setup()
 	local root = require("util").get_project_directory()
 	local executable = require("user").get_project_name() .."_steam_r"
 	local bin = root.."/bin"
+	dap.adapters.lua = {
+		type = "executable",
+		command = root.."/foreign/tools/VSCodeLuaDebug/Extension/DebugAdapter.exe",
+		-- command = "D:/source_control_testing/rotwood/foreign/tools/VSCodeLuaDebug/DebugAdapter/bin/Release/DebugAdapter.exe",
+		args = {},
+	}
+	dap.adapters.coreclr = {
+		type = "executable",
+		-- TODO put this path in user.lua
+		command = "C:/Users/Chris Petkau/.vscode/extensions/vadimcn.vscode-lldb-1.10.0/adapter/codelldb.exe",
+		args = {},
+	}
 	dap.configurations.lua = {
 		{
 			name= executable.." [slow]",
@@ -23,11 +35,13 @@ function debugger.setup()
 			env= {}
 		},
 	}
-	dap.adapters.lua = {
-		type = "executable",
-		command = root.."/foreign/tools/VSCodeLuaDebug/Extension/DebugAdapter.exe",
-		-- command = "D:/source_control_testing/rotwood/foreign/tools/VSCodeLuaDebug/DebugAdapter/bin/Release/DebugAdapter.exe",
-		args = {},
+	dap.configurations.cs = {
+		{
+			type = 'coreclr',
+			request = 'attach',
+			name = 'Attach to Unity',
+			processId = require('dap.utils').pick_process, -- Lets you pick Unity process
+		},
 	}
 
 	require("dapui").setup()
