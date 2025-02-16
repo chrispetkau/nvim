@@ -70,3 +70,9 @@
 [submodule "pack/third_party/start/roslyn.nvim"]
 	path = pack/third_party/start/roslyn.nvim
 	url = https://github.com/seblyng/roslyn.nvim.git
+[submodule "pack/third_party/start/lualine"]
+	path = pack/third_party/start/lualine
+	url = https://github.com/nvim-lualine/lualine.nvim.git
+[submodule "pack/third_party/start/nvim-web-devicons"]
+	path = pack/third_party/start/nvim-web-devicons
+	url = https://github.com/nvim-tree/nvim-web-devicons.git
