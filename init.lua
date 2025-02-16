@@ -54,7 +54,7 @@ require('onedark').load()
 -- Decrease font size a bit so we can fit 2 120-line windows side by side.
 vim.o.guifont = "Cascadia Code:h13:#h-slight"
 
-require('lualine').setup()
+require('plugins.lualine').setup()
 
 -- Setup keymaps after everything else, so we can bind to anything that we set up.
 require("keymaps").setup()
