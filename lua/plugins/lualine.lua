@@ -8,6 +8,7 @@ end
 
 function lualine.setup()
 	require('lualine').setup({
+		extensions = { 'fugitive', 'nvim-dap-ui' },
 		sections = {
 			lualine_x = { dap_status, 'filetype', },
 		},
