@@ -1,5 +1,11 @@
 local opts = {}
 
+function _G.MyFoldText()
+    -- Gets the first non-whitespace characters of the fold
+    local line = vim.fn.getline(vim.v.foldstart)
+    return " " .. line .. "  (" .. (vim.v.foldend - vim.v.foldstart) .. " lines)"
+end
+
 function opts.setup()
 	vim.opt.tabstop = 4
 	vim.opt.shiftwidth = 4
@@ -29,12 +35,22 @@ function opts.setup()
 
 	-- Enable Treesitter-based folding
 	vim.opt.foldmethod = "expr"
-	vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+	vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+	-- vim.opt.foldtext = "v:lua.vim.treesitter.foldtext()"
 
 	-- Ensure folds start open
 	vim.opt.foldenable = true
 	vim.opt.foldlevel = 99
 	vim.opt.foldlevelstart = 2
+	vim.opt.fillchars = 'fold: ,foldopen:,foldsep: ,foldclose:'
+	vim.opt.foldcolumn = '1'
+-- vim.o.foldenable = true
+-- vim.o.foldexpr = 'v:lua.vim.lsp.foldexpr()'
+-- vim.o.foldlevel = 99
+-- vim.o.foldlevelstart = 99
+-- vim.o.foldmethod = 'expr'
+
+	-- vim.opt.foldtext = "v:lua.MyFoldText()"
 end
 
 return opts

@@ -69,6 +69,7 @@ function lspconfig.setup()
 			end
 			if client.supports_method('textDocument/foldingRange') then
 				vim.opt.foldexpr = "v:lua.vim.lsp.foldexpr()"
+				vim.opt.foldtext = "v:lua.vim.lsp.foldtext()"
 			end
 		end,
 	})
