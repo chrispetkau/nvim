@@ -32,7 +32,7 @@ vim.cmd([[
 	" Re-source Neovim configuration Lua files.
 	" ** means any sub-folder.
 	" <afile> is file that triggered the event.
-	autocmd BufWritePost ~/.config/nvim/**/*.lua source <afile>
+	autocmd BufWritePost $HOME/AppData/Local/nvim/**/*.lua source <afile>
 
 	" Add some keymaps specific to Fugitive buffers.
 	autocmd FileType fugitive lua require("keymaps").install_fugitive_keymaps()
@@ -53,6 +53,8 @@ require('onedark').load()
 
 -- Decrease font size a bit so we can fit 2 120-line windows side by side.
 vim.o.guifont = "Cascadia Code:h13:#h-slight"
+
+require('plugins.lualine').setup()
 
 -- Setup keymaps after everything else, so we can bind to anything that we set up.
 require("keymaps").setup()

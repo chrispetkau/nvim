@@ -21,4 +21,6 @@ git submodule add https://github.com/folke/trouble.nvim.git pack/third_party/sta
 git submodule add https://github.com/voldikss/vim-floaterm.git pack/third_party/start/vim-floaterm
 git submodule add https://github.com/numToStr/Comment.nvim.git pack/third_party/start/Comment.nvim
 git submodule add https://github.com/seblyng/roslyn.nvim.git pack/third_party/start/roslyn.nvim
+git submodule add https://github.com/nvim-lualine/lualine.nvim.git pack/third_party/start/lualine
+git submodule add https://github.com/nvim-tree/nvim-web-devicons.git pack/third_party/start/nvim-web-devicons
 

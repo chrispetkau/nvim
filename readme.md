@@ -9,6 +9,8 @@ Variable.
 5. Install lua-language-server for Lua language server protocol support. Add its install path to your Path Environment 
 Variable.
 6. Install the Roslyn C# LSP binaries in nvim-data as per the ["Installation: Manually"](https://github.com/seblyng/roslyn.nvim).
+6.1 You also need the [.NET console runtime](https://dotnet.microsoft.com/en-us/download/dotnet/9.0/runtime?cid=getdotnetcore&os=windows&arch=x64).
+6.2 For debugger support, install the Unity Visual Studio Code plugin. This installs the "vstuc" Debug Adapter.
 7. Add a shortcut to send_to_server.cmd to your Startup folder.
 8. Use Regedit to forward Neovide file associations to send_to_server.
 
