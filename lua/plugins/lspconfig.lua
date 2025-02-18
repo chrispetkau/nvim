@@ -69,6 +69,8 @@ function lspconfig.setup()
 			end
 			if client.supports_method('textDocument/foldingRange') then
 				vim.opt.foldexpr = "v:lua.vim.lsp.foldexpr()"
+				-- TODO you would think this would be awesome, but both lua-lsp and Roslyn are worse than
+				-- treesitter IMHO
 				vim.opt.foldtext = "v:lua.vim.lsp.foldtext()"
 			end
 		end,
