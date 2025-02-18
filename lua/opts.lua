@@ -34,7 +34,7 @@ function opts.setup()
 	-- Ensure folds start open
 	vim.opt.foldenable = true
 	vim.opt.foldlevel = 99
-	vim.opt.foldlevelstart = 2
+	vim.opt.foldlevelstart = 3
 end
 
 return opts
