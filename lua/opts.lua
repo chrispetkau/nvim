@@ -40,7 +40,7 @@ function opts.setup()
 	vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 	-- vim.opt.foldtext = "v:lua.vim.treesitter.foldtext()" -- this function does not exist and so returns 0
 	-- TODO this is not bad, but is it better than the default?
-	-- vim.opt.foldtext = "v:lua.MyFoldText()"
+	vim.opt.foldtext = "v:lua.MyFoldText()"
 
 	-- Ensure folds start open
 	vim.opt.foldenable = true
