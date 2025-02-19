@@ -20,7 +20,10 @@ function lspconfig.setup()
 		},
 	}
 	lspconfig_plugin.rust_analyzer.setup {
-		on_attach = setup_lsp,
+		on_attach = function()
+			setup_lsp()
+			vim.opt.foldtext = "v:lua.vim.lsp.foldtext()"
+		end,
 		settings = {
 			['rust-analyzer'] = {
 				diagnostics = {
@@ -70,8 +73,8 @@ function lspconfig.setup()
 			if client.supports_method('textDocument/foldingRange') then
 				vim.opt.foldexpr = "v:lua.vim.lsp.foldexpr()"
 				-- TODO you would think this would be awesome, but both lua-lsp and Roslyn are worse than
-				-- treesitter IMHO
-				vim.opt.foldtext = "v:lua.vim.lsp.foldtext()"
+				-- Vim's default IMHO
+				-- vim.opt.foldtext = "v:lua.vim.lsp.foldtext()"
 			end
 		end,
 	})
