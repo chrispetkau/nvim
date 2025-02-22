@@ -79,6 +79,7 @@ function keymaps.setup()
 	-- 'b'uffer
 	vim.keymap.set("n", "<leader>bo", ":%bd|e#|bd#<CR>", { desc = "Close all buffers except current" }) -- buffer only
 	vim.keymap.set("n", "<leader>bd", ":bd<CR>", { desc = "Close all buffers except current" })
+	vim.keymap.set("n", "<leader>bp", "<C-^>", { desc = "Open most recent buffer" })
 
 	-- 'f'ind keymaps.
 	local tb = require('telescope.builtin')
@@ -91,8 +92,8 @@ function keymaps.setup()
 	-- local actions = require("telescope.actions")
 
 	-- 'e'rror keymaps.
-	vim.keymap.set("n", "<leader>en", vim.diagnostic.goto_next)
-	vim.keymap.set("n", "<leader>ep", vim.diagnostic.goto_prev)
+	vim.keymap.set("n", "<C-u>", vim.diagnostic.goto_next, { desc = "Goto next error" } )
+	vim.keymap.set("n", "<C-l>", vim.diagnostic.goto_prev, { desc = "Goto previous error" })
 
 	-- 't'erminal
 	vim.keymap.set('n', "<leader>to", ":FloatermNew --name=myfloat --height=0.8 --width=0.7 --autoclose=2<CR> ")
