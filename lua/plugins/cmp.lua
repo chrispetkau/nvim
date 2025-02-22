@@ -6,7 +6,7 @@ function mod.setup()
 	cmp.setup({
 		completion = {
 			-- Make this true to use manual completion only, via Ctrl-Space.
-			autocomplete = false,
+			-- autocomplete = true,
 		},
 		-- Enable LSP snippets
 		snippet = {
