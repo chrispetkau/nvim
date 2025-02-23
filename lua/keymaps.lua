@@ -78,8 +78,8 @@ function keymaps.setup()
 
 	-- 'b'uffer
 	vim.keymap.set("n", "<leader>bo", ":%bd|e#|bd#<CR>", { desc = "Close all buffers except current" }) -- buffer only
-	vim.keymap.set("n", "<leader>bd", ":bd<CR>", { desc = "Close all buffers except current" })
-	vim.keymap.set("n", "<leader>bp", "<C-^>", { desc = "Open most recent buffer" })
+	vim.keymap.set("n", ",h", "<C-^>", { desc = "Open most recent buffer" })
+	vim.keymap.set('n', ",d", ":bd<CR>", { desc = "Close buffer" })
 
 	-- 'f'ind keymaps.
 	local tb = require('telescope.builtin')
@@ -92,15 +92,17 @@ function keymaps.setup()
 	-- local actions = require("telescope.actions")
 
 	-- 'e'rror keymaps.
-	vim.keymap.set("n", "<C-u>", vim.diagnostic.goto_next, { desc = "Goto next error" } )
-	vim.keymap.set("n", "<C-l>", vim.diagnostic.goto_prev, { desc = "Goto previous error" })
+	vim.keymap.set("n", "<C-->", vim.diagnostic.goto_next, { desc = "Goto next error" } )
+	vim.keymap.set("n", "<C-m>", vim.diagnostic.goto_prev, { desc = "Goto previous error" })
 
 	-- 't'erminal
 	vim.keymap.set('n', "<leader>to", ":FloatermNew --name=myfloat --height=0.8 --width=0.7 --autoclose=2<CR> ")
 	vim.keymap.set('n', "<leader>tt", ":FloatermToggle myfloat<CR>")
 	vim.keymap.set('t', "<Esc>", "<C-\\><C-n>:q<CR>")
 
-	vim.keymap.set('n', "<leader><Tab>", ":tabnew<CR>")
+	-- tab management 
+	vim.keymap.set('n', ",<Tab>", ":tabnew<CR>", { desc = "New tab" })
+	vim.keymap.set('n', ",v", ":tabc<CR>", { desc = "Close tab" })
 
 	vim.keymap.set('i', "<C-l>", "<Esc>:nohlsearch<CR>a", { desc = "Clear search highlights from Insert mode" })
 
@@ -136,6 +138,9 @@ function keymaps.setup()
 	-- TODO vim.keymap.set("n", "<leader>dr", function() util.focus_dap_ui_element("[dap-repl-3062]") end, { desc = "Focus DAP-UI REPL" })
 	vim.keymap.set("n", "<leader>dc", function() util.focus_dap_ui_element("DAP Console") end, { desc = "Focus DAP-UI Console" })
 	vim.keymap.set("n", "<leader>dw", function() util.focus_dap_ui_element("DAP Watches") end, { desc = "Focus DAP-UI Watches" })
+
+	-- 'g'it keymaps
+	vim.keymap.set("n", "<leader>gl", util.git_log_author_date(), { desc = "One-line git log with author and date" })
 end
 
 return keymaps
