@@ -20,8 +20,8 @@ function lspconfig.setup()
 		},
 	}
 	lspconfig_plugin.rust_analyzer.setup {
-		on_attach = function()
-			setup_lsp()
+		on_attach = function(client)
+			setup_lsp(client)
 			vim.opt.foldtext = "v:lua.vim.lsp.foldtext()"
 		end,
 		settings = {
