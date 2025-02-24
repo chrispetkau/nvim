@@ -32,7 +32,7 @@ vim.cmd([[
 	" Re-source Neovim configuration Lua files.
 	" ** means any sub-folder.
 	" <afile> is file that triggered the event.
-	autocmd BufWritePost $HOME/AppData/Local/nvim/**/*.lua source <afile>
+	autocmd BufWritePost $HOME/AppData/Local/nvim/**/*.lua lua require("util").reload_nvim_lua_file(vim.fn.expand("<afile>"))
 
 	" Add some keymaps specific to Fugitive buffers.
 	autocmd FileType fugitive lua require("keymaps").install_fugitive_keymaps()

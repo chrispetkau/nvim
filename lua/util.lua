@@ -143,4 +143,16 @@ function util.get_standard_directories()
 	}
 end
 
+function util.git_log_author_date()
+	return ':G log --pretty=format:"%h %ad | %an | %s" --date=short<CR>'
+end
+
+function util.reload_nvim_lua_file(filepath)
+	local filename = filepath:gsub("%.lua$", ""):gsub("lua\\", ""):gsub("/", "."):gsub("\\", ".")
+    package.loaded[filename] = nil
+    require(filename)
+    vim.cmd("source " .. vim.fn.expand("$MYVIMRC"))
+    print("Reloaded:", filename)
+end
+
 return util

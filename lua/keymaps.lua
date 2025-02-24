@@ -17,13 +17,13 @@ function keymaps.set_lsp_keymappings(client)
 
 	-- 'g'o
 	map('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', "Goto declaration")
-	map('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', "Goto definition")
-	map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', "Goto references")
+	-- map('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', "Goto definition")
+	-- map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', "Goto references")
 	map('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', "Goto signature help")
-	map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', "Goto implementation")
-	map('n', 'gy', '<cmd>lua vim.lsp.buf.type_definition()<CR>', "Goto type definition")
-	map('n', 'gw', '<cmd>lua vim.lsp.buf.document_symbol()<CR>', "Goto document symbol")
-	map('n', 'gW', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>', "Goto workspace symbol")
+	-- map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', "Goto implementation")
+	-- map('n', 'gy', '<cmd>lua vim.lsp.buf.type_definition()<CR>', "Goto type definition")
+	-- map('n', 'gw', '<cmd>lua vim.lsp.buf.document_symbol()<CR>', "Goto document symbol")
+	-- map('n', 'gW', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>', "Goto workspace symbol")
 
 	-- code 'a'ction
 	map('n', '<leader>ah', '<cmd>lua vim.lsp.buf.hover()<CR>', "Hover")
@@ -83,7 +83,8 @@ function keymaps.setup()
 
 	-- 'b'uffer
 	vim.keymap.set("n", "<leader>bo", ":%bd|e#|bd#<CR>", { desc = "Close all buffers except current" }) -- buffer only
-	vim.keymap.set("n", "<leader>bd", ":bd<CR>", { desc = "Close all buffers except current" })
+	vim.keymap.set("n", ",h", "<C-^>", { desc = "Open most recent buffer" })
+	vim.keymap.set('n', ",d", ":bd<CR>", { desc = "Close buffer" })
 
 	-- 'f'ind keymaps.
 	local tb = require('telescope.builtin')
@@ -92,19 +93,27 @@ function keymaps.setup()
 	vim.keymap.set('n', '<leader>fb', tb.buffers, { desc = 'Telescope buffers' })
 	vim.keymap.set('n', '<leader>fh', tb.help_tags, { desc = 'Telescope help tags' })
 	vim.keymap.set("n", "<leader>fd", util.select_directory, { desc = "Select and change directory" })
+	vim.keymap.set('n', 'gr', tb.lsp_references, { desc = 'Telescope find references' })
+	vim.keymap.set('n', 'gd', tb.lsp_definitions, { desc = 'Telescope find definitions' })
+	vim.keymap.set('n', 'gy', tb.lsp_type_definitions, { desc = 'Telescope find type definitions' })
+	vim.keymap.set('n', 'gi', tb.lsp_implementation, { desc = 'Telescope find implementation' })
+	vim.keymap.set('n', 'gw', tb.lsp_document_symbol, { desc = 'Telescope find document symbol' })
+	vim.keymap.set('n', 'gW', tb.lsp_workspace_symbol, { desc = 'Telescope find workspace symbol' })
 
 	-- local actions = require("telescope.actions")
 
 	-- 'e'rror keymaps.
-	vim.keymap.set("n", "<leader>en", vim.diagnostic.goto_next)
-	vim.keymap.set("n", "<leader>ep", vim.diagnostic.goto_prev)
+	vim.keymap.set("n", "<C-->", vim.diagnostic.goto_next, { desc = "Goto next error" } )
+	vim.keymap.set("n", "<C-m>", vim.diagnostic.goto_prev, { desc = "Goto previous error" })
 
 	-- 't'erminal
 	vim.keymap.set('n', "<leader>to", ":FloatermNew --name=myfloat --height=0.8 --width=0.7 --autoclose=2<CR> ")
 	vim.keymap.set('n', "<leader>tt", ":FloatermToggle myfloat<CR>")
 	vim.keymap.set('t', "<Esc>", "<C-\\><C-n>:q<CR>")
 
-	vim.keymap.set('n', "<leader><Tab>", ":tabnew<CR>")
+	-- tab management 
+	vim.keymap.set('n', ",<Tab>", ":tabnew<CR>", { desc = "New tab" })
+	vim.keymap.set('n', ",v", ":tabc<CR>", { desc = "Close tab" })
 
 	vim.keymap.set('i', "<C-l>", "<Esc>:nohlsearch<CR>a", { desc = "Clear search highlights from Insert mode" })
 
@@ -140,6 +149,9 @@ function keymaps.setup()
 	-- TODO vim.keymap.set("n", "<leader>dr", function() util.focus_dap_ui_element("[dap-repl-3062]") end, { desc = "Focus DAP-UI REPL" })
 	vim.keymap.set("n", "<leader>dc", function() util.focus_dap_ui_element("DAP Console") end, { desc = "Focus DAP-UI Console" })
 	vim.keymap.set("n", "<leader>dw", function() util.focus_dap_ui_element("DAP Watches") end, { desc = "Focus DAP-UI Watches" })
+
+	-- 'g'it keymaps
+	vim.keymap.set("n", "<leader>gl", util.git_log_author_date(), { desc = "One-line git log with author and date" })
 end
 
 return keymaps
