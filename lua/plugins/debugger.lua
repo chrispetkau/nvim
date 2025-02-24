@@ -88,18 +88,18 @@ function debugger.setup()
 					{ id = "stacks",      size = 0.20 },
 					{ id = "watches",     size = 0.20 },
 				},
-				size = 50,  -- Width of left sidebar
+				size = 100,  -- Width of left sidebar
 				position = "left",
 			},
-			{
-				elements = {
-					-- Bottom panel with console and repl
-					{ id = "repl",    size = 0.75 },  -- Make REPL larger
-					{ id = "console", size = 0.25 },  -- Smaller
-				},
-				size = 10,  -- Height of bottom panel
-				position = "bottom",
-			},
+			-- {
+			-- 	elements = {
+			-- 		-- Bottom panel with console and repl
+			-- 		{ id = "repl",    size = 0.75 },  -- Make REPL larger
+			-- 		{ id = "console", size = 0.25 },  -- Smaller
+			-- 	},
+			-- 	size = 10,  -- Height of bottom panel
+			-- 	position = "bottom",
+			-- },
 		},
 		floating = {
 			max_height = 0.8, -- Adjust floating window size

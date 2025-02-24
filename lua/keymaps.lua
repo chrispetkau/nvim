@@ -70,6 +70,11 @@ function keymaps.install_fugitive_keymaps()
 	-- map('n', 'q', '<cmd>:tabclose<CR>', "Close Fugitive diffsplit tab")
 end
 
+function keymaps.install_roslyn_keymaps()
+	-- Hacky restart of Roslyn on the first .sln.
+	vim.keymap.set('n', '-r', ':Roslyn stop<CR>:Roslyn target<CR>1<CR>')
+end
+
 function keymaps.setup()
 	local util = require("util")
 

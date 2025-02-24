@@ -5,8 +5,8 @@ function mod.setup()
 	local cmp = require("cmp")
 	cmp.setup({
 		completion = {
-			-- Make this true to use manual completion only, via Ctrl-Space.
-			-- autocomplete = true,
+			-- Make this false to use manual completion only, via Ctrl-Space.
+			autocomplete = false,
 		},
 		-- Enable LSP snippets
 		snippet = {

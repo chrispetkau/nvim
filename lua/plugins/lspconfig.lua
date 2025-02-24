@@ -34,7 +34,10 @@ function lspconfig.setup()
 	}
 	require("roslyn").setup({
 		config = {
-			on_attach = setup_lsp,
+			on_attach = function(client)
+				setup_lsp(client)
+				require('keymaps').install_roslyn_keymaps()
+			end,
 			settings = {
 				["csharp|inlay_hints"] = {
 					csharp_enable_inlay_hints_for_implicit_object_creation = true,
