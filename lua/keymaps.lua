@@ -96,9 +96,9 @@ function keymaps.setup()
 	vim.keymap.set('n', 'gr', tb.lsp_references, { desc = 'Telescope find references' })
 	vim.keymap.set('n', 'gd', tb.lsp_definitions, { desc = 'Telescope find definitions' })
 	vim.keymap.set('n', 'gy', tb.lsp_type_definitions, { desc = 'Telescope find type definitions' })
-	vim.keymap.set('n', 'gi', tb.lsp_implementation, { desc = 'Telescope find implementation' })
-	vim.keymap.set('n', 'gw', tb.lsp_document_symbol, { desc = 'Telescope find document symbol' })
-	vim.keymap.set('n', 'gW', tb.lsp_workspace_symbol, { desc = 'Telescope find workspace symbol' })
+	vim.keymap.set('n', 'gi', tb.lsp_implementations, { desc = 'Telescope find implementations' })
+	vim.keymap.set('n', 'gw', tb.lsp_document_symbols, { desc = 'Telescope find document symbols' })
+	vim.keymap.set('n', 'gW', tb.lsp_workspace_symbols, { desc = 'Telescope find workspace symbols' })
 
 	-- local actions = require("telescope.actions")
 
