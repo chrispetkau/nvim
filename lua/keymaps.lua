@@ -72,19 +72,19 @@ end
 
 function keymaps.install_roslyn_keymaps()
 	-- Hacky restart of Roslyn on the first .sln.
-	vim.keymap.set('n', '-r', ':Roslyn stop<CR>:Roslyn target<CR>1<CR>')
+	vim.keymap.set('n', '-r', ':Roslyn stop<CR>|:Roslyn target<CR>|1<CR>|<CR>')
 end
 
 function keymaps.setup()
 	local util = require("util")
 
 	-- 'w'indow operation
-	vim.keymap.set("n", "<leader>w", "<C-w>", { desc = "Window operation" })
+	vim.keymap.set("n", "<leader>n", "<C-w>", { desc = "Window operation" })
 
 	-- 'b'uffer
 	vim.keymap.set("n", "<leader>bo", ":%bd|e#|bd#<CR>", { desc = "Close all buffers except current" }) -- buffer only
-	vim.keymap.set("n", ",h", "<C-^>", { desc = "Open most recent buffer" })
-	vim.keymap.set('n', ",d", ":bd<CR>", { desc = "Close buffer" })
+	vim.keymap.set("n", "<C-Tab>", "<C-^>", { desc = "Open most recent buffer" })
+	vim.keymap.set('n', "-d", ":bd<CR>", { desc = "Close buffer" })
 
 	-- 'f'ind keymaps.
 	local tb = require('telescope.builtin')
@@ -103,8 +103,8 @@ function keymaps.setup()
 	-- local actions = require("telescope.actions")
 
 	-- 'e'rror keymaps.
-	vim.keymap.set("n", "<C-->", vim.diagnostic.goto_next, { desc = "Goto next error" } )
-	vim.keymap.set("n", "<C-m>", vim.diagnostic.goto_prev, { desc = "Goto previous error" })
+	vim.keymap.set("n", "<C-\">", vim.diagnostic.goto_next, { desc = "Goto next error" } )
+	vim.keymap.set("n", "<C-->", vim.diagnostic.goto_prev, { desc = "Goto previous error" })
 
 	-- 't'erminal
 	vim.keymap.set('n', "<leader>to", ":FloatermNew --name=myfloat --height=0.8 --width=0.7 --autoclose=2<CR> ")
@@ -112,8 +112,8 @@ function keymaps.setup()
 	vim.keymap.set('t', "<Esc>", "<C-\\><C-n>:q<CR>")
 
 	-- tab management 
-	vim.keymap.set('n', ",<Tab>", ":tabnew<CR>", { desc = "New tab" })
-	vim.keymap.set('n', ",v", ":tabc<CR>", { desc = "Close tab" })
+	vim.keymap.set('n', "<leader><Tab>", ":tabnew<CR>", { desc = "New tab" })
+	vim.keymap.set('n', "-v", ":tabc<CR>", { desc = "Close tab" })
 
 	vim.keymap.set('i', "<C-l>", "<Esc>:nohlsearch<CR>a", { desc = "Clear search highlights from Insert mode" })
 
