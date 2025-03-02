@@ -21,6 +21,10 @@ function user.get_user_name()
 	return "chris petkau"
 end
 
+function user.get_vscode_extensions_directory()
+	return 'C:/users/chris petkau/.vscode/extensions/'
+end	
+
 -- Directories of interest on this system.
 function user.get_project_directories()
 	local result = require("util").get_standard_directories()

@@ -8,9 +8,12 @@ function debugger.setup()
 	local root = require("util").get_project_directory()
 	local executable = require("user").get_project_name() .."_steam_r"
 	local bin = root.."/bin"
+	local vscode_extensions = require("user").get_vscode_extensions_directory()
+	local lua_dap_path = vscode_extensions..'klei.lua.debugger-1.0.0/'
+	local vstuc_path = vscode_extensions..'visualstudiotoolsforunity.vstuc-1.1.0/bin/'
 	dap.adapters.lua = {
 		type = "executable",
-		command = root.."/foreign/tools/VSCodeLuaDebug/Extension/DebugAdapter.exe",
+		command = lua_dap_path.."/DebugAdapter.exe",
 		-- command = "D:/source_control_testing/rotwood/foreign/tools/VSCodeLuaDebug/DebugAdapter/bin/Release/DebugAdapter.exe",
 		args = {},
 	}
@@ -29,7 +32,6 @@ function debugger.setup()
 			env= {}
 		},
 	}
-	local vstuc_path          = 'C:/users/chris petkau/.vscode/extensions/visualstudiotoolsforunity.vstuc-1.1.0/bin/'
 	dap.adapters.vstuc        = {
 		type = 'executable',
 		command = 'dotnet',
