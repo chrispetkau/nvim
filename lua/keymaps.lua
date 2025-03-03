@@ -72,7 +72,13 @@ end
 
 function keymaps.install_roslyn_keymaps()
 	-- Hacky restart of Roslyn on the first .sln.
-	vim.keymap.set('n', '-r', ':Roslyn stop<CR>|:Roslyn target<CR>|1<CR>|<CR>')
+	vim.keymap.set('n', '-r', function()
+		vim.cmd(':Roslyn stop')
+		vim.schedule(function()
+			vim.cmd(':Roslyn target')
+			vim.api.nvim_feedkeys('1\n', 'n', false)
+		end)
+	end, { desc = "Restart Roslyn LSP" })
 end
 
 function keymaps.setup()
@@ -103,8 +109,8 @@ function keymaps.setup()
 	-- local actions = require("telescope.actions")
 
 	-- 'e'rror keymaps.
-	vim.keymap.set("n", "<C-\">", vim.diagnostic.goto_next, { desc = "Goto next error" } )
-	vim.keymap.set("n", "<C-->", vim.diagnostic.goto_prev, { desc = "Goto previous error" })
+	vim.keymap.set("n", "<C-->", vim.diagnostic.goto_next, { desc = "Goto next error" } )
+	vim.keymap.set("n", "<C-\">", vim.diagnostic.goto_prev, { desc = "Goto previous error" })
 
 	-- 't'erminal
 	vim.keymap.set('n', "<leader>to", ":FloatermNew --name=myfloat --height=0.8 --width=0.7 --autoclose=2<CR> ")
