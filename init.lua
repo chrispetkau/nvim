@@ -36,6 +36,9 @@ vim.cmd([[
 
 	" Add some keymaps specific to Fugitive buffers.
 	autocmd FileType fugitive lua require("keymaps").install_fugitive_keymaps()
+
+	" Add some keymaps for working with cargo.toml files via cargo.vim.
+	autocmd FileType cargo.toml lua require("keymaps").install_cargo_toml_keymaps()
 ]])
 
 require("plugins.lspconfig").setup()
@@ -43,6 +46,7 @@ require("plugins.cmp").setup()
 require("plugins.diagnostic").setup()
 require("plugins.treesitter").setup()
 require("plugins.debugger").setup()
+require("plugins.crates").setup()
 
 require('Comment').setup(require("keymaps").get_comment_plugin_setup_spec())
 

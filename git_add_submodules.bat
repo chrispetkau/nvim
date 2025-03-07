@@ -23,4 +23,5 @@ git submodule add https://github.com/numToStr/Comment.nvim.git pack/third_party/
 git submodule add https://github.com/seblyng/roslyn.nvim.git pack/third_party/start/roslyn.nvim
 git submodule add https://github.com/nvim-lualine/lualine.nvim.git pack/third_party/start/lualine
 git submodule add https://github.com/nvim-tree/nvim-web-devicons.git pack/third_party/start/nvim-web-devicons
+git submodule add https://github.com/saecki/crates.nvim.git pack/third_party/start/crates.nvim
 
