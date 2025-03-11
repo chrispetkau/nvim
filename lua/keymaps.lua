@@ -114,6 +114,10 @@ function keymaps.setup()
 
 	-- 'w'indow operation
 	vim.keymap.set("n", "<leader>n", "<C-w>", { desc = "Window operation" })
+	vim.keymap.set("n", "<C-A-S-D-n>", "<C-w>k", { desc = "Window up" })
+	vim.keymap.set("n", "<C-A-S-D-n>", "<C-w>j", { desc = "Window down" })
+	vim.keymap.set("n", "<C-A-S-D-CR>", "<C-w>h", { desc = "Window left" })
+	vim.keymap.set("n", "<C-A-S-D-e>", "<C-w>h", { desc = "Window right" })
 
 	-- 'b'uffer
 	vim.keymap.set("n", "<leader>bo", ":%bd|e#|bd#<CR>", { desc = "Close all buffers except current" }) -- buffer only
