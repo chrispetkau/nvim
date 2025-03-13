@@ -32,6 +32,11 @@ which makes interacting with tools feel like editing text.
 split or horizontal `s`plit. You can also `c`lose a window.
 9. Use vim.api.nvim_create_user_command(name, lua_function, TODO_params?) to bind any of your custom lua functions
 to commands you can execute on Neovim's command line.
+10. <C-q> from a Telescope window to move results into a Quickfind window.
+11. <C-r> <C-w> to paste whatever was under your cursor into a Telescope window.
+12. q: to show list of yanks.
+13. :s/<find>/<replace>/g for global search/replace
+14. % means current file
 
 # Mnemonics
 Here are the mnemonics I use for my keymaps:
