@@ -48,8 +48,8 @@ function keymaps.get_comment_plugin_setup_spec()
 			block = 'gb',
 		},
 		opleader = {
-			line = 'gc',
-			block = 'gb',
+			line = 'gC',
+			block = 'gB',
 		},
 		extra = {
 			above = 'gO',
@@ -79,6 +79,11 @@ function keymaps.install_roslyn_keymaps()
 			vim.api.nvim_feedkeys('1\n', 'n', false)
 		end)
 	end, { desc = "Restart Roslyn LSP" })
+end
+
+function keymaps.install_copilot_chat_keymaps()
+	-- vim.keymap.set('i', '<Tab>', require('CopilotChat').trigger_completion, { desc = "Copilot Chat Trigger Completion" })
+	-- vim.keymap.set('i', '<Tab>', 'copilot#Accept("<Tab>")', { silent = true, expr = true, desc = "Copilot Chat Trigger Completion" })
 end
 
 function keymaps.install_cargo_toml_keymaps()
@@ -114,10 +119,6 @@ function keymaps.setup()
 
 	-- 'w'indow operation
 	vim.keymap.set("n", "<leader>n", "<C-w>", { desc = "Window operation" })
-	vim.keymap.set("n", "<C-A-S-D-n>", "<C-w>k", { desc = "Window up" })
-	vim.keymap.set("n", "<C-A-S-D-n>", "<C-w>j", { desc = "Window down" })
-	vim.keymap.set("n", "<C-A-S-D-CR>", "<C-w>h", { desc = "Window left" })
-	vim.keymap.set("n", "<C-A-S-D-e>", "<C-w>h", { desc = "Window right" })
 
 	-- 'b'uffer
 	vim.keymap.set("n", "<leader>bo", ":%bd|e#|bd#<CR>", { desc = "Close all buffers except current" }) -- buffer only
@@ -130,6 +131,13 @@ function keymaps.setup()
 	vim.keymap.set('n', '<leader>fg', tb.live_grep, { desc = 'Telescope live grep' })
 	vim.keymap.set('n', '<leader>fb', tb.buffers, { desc = 'Telescope buffers' })
 	vim.keymap.set('n', '<leader>fh', tb.help_tags, { desc = 'Telescope help tags' })
+	vim.keymap.set('n', '<leader>fc', tb.commands, { desc = 'Telescope commands' })
+	vim.keymap.set('n', '<leader>fq', tb.quickfix, { desc = 'Telescope quickfix' })
+	vim.keymap.set('n', '<leader>fr', tb.registers, { desc = 'Telescope registers' })
+	vim.keymap.set('n', '<leader>fe', tb.diagnostics, { desc = 'Telescope diagnostics/errors' })
+	vim.keymap.set('n', '<leader>fu', tb.git_bcommits, { desc = "Telescope current buffer's git commits" })
+	vim.keymap.set('n', '<leader>fz', tb.git_stash, { desc = "Telescope git stashes" })
+	vim.keymap.set('n', '<leader>f?', tb.builtin, { desc = "Telescope builtin pickers" })
 	vim.keymap.set("n", "<leader>fd", util.select_directory, { desc = "Select and change directory" })
 	vim.keymap.set('n', 'gr', tb.lsp_references, { desc = 'Telescope find references' })
 	vim.keymap.set('n', 'gd', tb.lsp_definitions, { desc = 'Telescope find definitions' })

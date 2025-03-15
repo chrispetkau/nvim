@@ -23,6 +23,10 @@ function opts.setup()
 	-- local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 	-- vim.opt.rtp:prepend(lazypath)
 
+	local resolved_home = vim.fn.expand("$HOME")
+	vim.opt.rtp:append(resolved_home .. "/AppData/Local/nvim/pack/third_party/start/nui.nvim")
+	vim.opt.rtp:append("C:/Users/Chris Petkau/AppData/Local/nvim/pack/third_party/start/nui.nvim")
+
 	--Set completeopt to have a better completion experience
 	-- :help completeopt
 	-- menuone: popup even when there's only one match
@@ -45,9 +49,13 @@ function opts.setup()
 	-- Ensure folds start open
 	vim.opt.foldenable = true
 	vim.opt.foldlevel = 99
-	vim.opt.foldlevelstart = 3
+	vim.opt.foldlevelstart = 99
 	vim.opt.fillchars = 'fold: ,foldopen:,foldsep: ,foldclose:'
 	vim.opt.foldcolumn = '1'
+
+	-- This from avante.nvim documentation. Setting it to 3 means the last window will always have a status line.
+	-- views can only be fully collapsed with the global statusline
+	vim.opt.laststatus = 3
 end
 
 return opts
