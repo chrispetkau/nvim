@@ -46,3 +46,9 @@ Here are the mnemonics I use for my keymaps:
 - `<leader>e`rror {`n`ext, `p`revious, `e`rror of current}
 - `<leader>g`o {`f`ile, `r`eferences, `g`it, `i`ncoming, `o`utgoing, `d`efinition}
 - `g`o do an arbitrary thing because g is convenient {`c`omment line, comment `b`lock}
+
+# TODO
+- Figure out the most hyper mod combo useable in Vim. Write that to left-pinky-hold in QMK. Map window movements
+using that modifier.
+- Remove reliance on git_add_submodules.bat. Figure out the canonical way to sync submodules and get in the habit.
+- Using '-' as a leader doesn't work well in Fugitive. Maybe change to ','. Need to remap default Vim behaviour for ','.
