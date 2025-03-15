@@ -32,22 +32,30 @@ vim.cmd([[
 	" Re-source Neovim configuration Lua files.
 	" ** means any sub-folder.
 	" <afile> is file that triggered the event.
-	autocmd BufWritePost $HOME/AppData/Local/nvim/**/*.lua lua require("util").reload_nvim_lua_file(vim.fn.expand("<afile>"))
+	" autocmd BufWritePost $HOME/AppData/Local/nvim/**/*.lua lua require("util").reload_nvim_lua_file(vim.fn.expand("<afile>"))
 
 	" Add some keymaps specific to Fugitive buffers.
 	autocmd FileType fugitive lua require("keymaps").install_fugitive_keymaps()
 
+	autocmd FileType copilot-chat lua require("keymaps").install_copilot_chat_keymaps()
+
 	" Add some keymaps for working with Cargo.toml files via cargo.vim.
-	autocmd BufRead,BufNewFile Cargo.toml lua require("keymaps").install_cargo_toml_keymaps()
+	" autocmd BufRead,BufNewFile Cargo.toml lua require("keymaps").install_cargo_toml_keymaps()
 ]])
 
-require("plugins.lspconfig").setup()
-require("plugins.cmp").setup()
-require("plugins.diagnostic").setup()
-require("plugins.treesitter").setup()
-require("plugins.debugger").setup()
-require("plugins.crates").setup()
-require("plugins.trouble").setup()
+require("plugins.lspconfig").setup() -- Language Server Protocol
+require("plugins.cmp").setup() -- Auto-completion
+require("plugins.diagnostic").setup() -- ???
+require("plugins.treesitter").setup() -- File-type-based formatting??
+require("plugins.debugger").setup() -- Debugger Adapter Protocol
+--require("plugins.crates").setup() -- Cargo.toml support
+require("plugins.trouble").setup() -- Diagnostics
+require("plugins.dressing").setup() -- UI improvements
+-- require("plugins.nui").setup() -- UI components
+-- require("plugins.copilot").setup() -- Code suggestions
+require("plugins.render_markdown").setup() -- Improved .md rendering
+require("plugins.img_clip").setup() -- Embed images in .md
+require("plugins.copilot_chat").setup() -- Chat with Copilot
 
 require('Comment').setup(require("keymaps").get_comment_plugin_setup_spec())
 
@@ -55,6 +63,9 @@ require('onedark').setup {
 	style = 'darker'
 }
 require('onedark').load()
+
+-- Avante should come after the color scheme for best results.
+-- require("plugins.avante").setup() -- AI Assistant
 
 -- Decrease font size a bit so we can fit 2 120-line windows side by side.
 vim.o.guifont = "Cascadia Code:h13:#h-slight"
