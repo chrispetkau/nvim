@@ -55,7 +55,8 @@ function opts.setup()
 
 	-- This from avante.nvim documentation. Setting it to 3 means the last window will always have a status line.
 	-- views can only be fully collapsed with the global statusline
-	vim.opt.laststatus = 3
+	-- TODO ugh, no. We want each window to have its own status line.
+	-- vim.opt.laststatus = 3
 end
 
 return opts
