@@ -97,3 +97,6 @@
 [submodule "pack/third_party/start/CopilotChat.nvim"]
 	path = pack/third_party/start/CopilotChat.nvim
 	url = https://github.com/CopilotC-Nvim/CopilotChat.nvim.git
+[submodule "pack/third_party/start/nvim-treesitter-context"]
+	path = pack/third_party/start/nvim-treesitter-context
+	url = https://github.com/nvim-treesitter/nvim-treesitter-context.git
