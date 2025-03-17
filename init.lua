@@ -14,8 +14,9 @@ vim.g.maplocalleader = "\\"
 require("opts").setup()
 
 vim.cmd([[
+	" TODO delete, I think. We don't need this. It shows up when we arrive at an error. It interferes with hover text.
 	" Show error when cursor is on it
-	autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
+	" autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
 
 	" Automatically resize buffers on window resize
 	autocmd VimResized * wincmd = 
@@ -29,8 +30,9 @@ vim.cmd([[
 	" Keep folds open after saving
 	autocmd BufWritePost * silent! mkview | silent! loadview
 
+	" TODO does so many weird things and doesn't seem to work.
 	" Re-source Neovim configuration Lua files.
-	" ** means any sub-folder.
+	" ** means any sub-folderr
 	" <afile> is file that triggered the event.
 	" autocmd BufWritePost $HOME/AppData/Local/nvim/**/*.lua lua require("util").reload_nvim_lua_file(vim.fn.expand("<afile>"))
 
@@ -40,7 +42,7 @@ vim.cmd([[
 	autocmd FileType copilot-chat lua require("keymaps").install_copilot_chat_keymaps()
 
 	" Add some keymaps for working with Cargo.toml files via cargo.vim.
-	" autocmd BufRead,BufNewFile Cargo.toml lua require("keymaps").install_cargo_toml_keymaps()
+	autocmd BufRead,BufNewFile Cargo.toml lua require("keymaps").install_cargo_toml_keymaps()
 ]])
 
 require("plugins.lspconfig").setup() -- Language Server Protocol
@@ -48,11 +50,9 @@ require("plugins.cmp").setup() -- Auto-completion
 require("plugins.diagnostic").setup() -- ???
 require("plugins.treesitter").setup() -- File-type-based formatting??
 require("plugins.debugger").setup() -- Debugger Adapter Protocol
---require("plugins.crates").setup() -- Cargo.toml support
+require("plugins.crates").setup() -- Cargo.toml support
 require("plugins.trouble").setup() -- Diagnostics
 require("plugins.dressing").setup() -- UI improvements
--- require("plugins.nui").setup() -- UI components
--- require("plugins.copilot").setup() -- Code suggestions
 require("plugins.render_markdown").setup() -- Improved .md rendering
 require("plugins.img_clip").setup() -- Embed images in .md
 require("plugins.copilot_chat").setup() -- Chat with Copilot
@@ -63,9 +63,6 @@ require('onedark').setup {
 	style = 'darker'
 }
 require('onedark').load()
-
--- Avante should come after the color scheme for best results.
--- require("plugins.avante").setup() -- AI Assistant
 
 -- Decrease font size a bit so we can fit 2 120-line windows side by side.
 vim.o.guifont = "Cascadia Code:h13:#h-slight"
