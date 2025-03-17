@@ -52,3 +52,4 @@ Here are the mnemonics I use for my keymaps:
 using that modifier.
 - Remove reliance on git_add_submodules.bat. Figure out the canonical way to sync submodules and get in the habit.
 - Using '-' as a leader doesn't work well in Fugitive. Maybe change to ','. Need to remap default Vim behaviour for ','.
+- 'gc' to comment a line doesn't have immediate effect. Why? Is it waiting for another key in the combo?

@@ -82,7 +82,7 @@ function keymaps.install_roslyn_keymaps()
 end
 
 function keymaps.install_copilot_chat_keymaps()
-	-- vim.keymap.set('i', '<Tab>', require('CopilotChat').trigger_completion, { desc = "Copilot Chat Trigger Completion" })
+	-- vim.keymap.set('i', '<F1>', require('CopilotChat').trigger_complete, { desc = "Copilot Chat Trigger Completion" })
 	-- vim.keymap.set('i', '<Tab>', 'copilot#Accept("<Tab>")', { silent = true, expr = true, desc = "Copilot Chat Trigger Completion" })
 end
 
@@ -183,6 +183,8 @@ function keymaps.setup()
 	vim.keymap.set("", "<F11>", function() dap.step_into() end, { desc = "Step into" })
 	vim.keymap.set("", "<S-F11>", function() dap.step_out() end, { desc = "Step out" })
 	vim.keymap.set("", "<F7>", function() dap.repl.open() end, { desc = "Read-eval-print" })
+
+	-- TODO maybe remap page-up and page-down to <C-u> and <C-d> in normal mode.
 
 	-- 'd'ebugger keymaps
 	local dapui = require("dapui")

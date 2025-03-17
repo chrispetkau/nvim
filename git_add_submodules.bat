@@ -24,7 +24,6 @@ git submodule add https://github.com/seblyng/roslyn.nvim.git pack/third_party/st
 git submodule add https://github.com/nvim-lualine/lualine.nvim.git pack/third_party/start/lualine
 git submodule add https://github.com/nvim-tree/nvim-web-devicons.git pack/third_party/start/nvim-web-devicons
 git submodule add https://github.com/saecki/crates.nvim.git pack/third_party/start/crates.nvim
-git submodule add https://github.com/yetone/avante.nvim.git pack/third_party/start/avante.nvim
 git submodule add https://github.com/stevearc/dressing.nvim.git pack/third_party/start/dressing.nvim
 git submodule add https://github.com/MunifTanjim/nui.nvim.git pack/third_party/start/nui.nvim
 git submodule add https://github.com/github/copilot.vim.git pack/third_party/start/copilot.nvim
