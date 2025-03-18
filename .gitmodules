@@ -85,8 +85,8 @@
 [submodule "pack/third_party/start/nui.nvim"]
 	path = pack/third_party/start/nui.nvim
 	url = https://github.com/MunifTanjim/nui.nvim.git
-[submodule "pack/third_party/start/copilot.nvim"]
-	path = pack/third_party/start/copilot.nvim
+[submodule "pack/third_party/start/copilot.vim"]
+	path = pack/third_party/start/copilot.vim
 	url = https://github.com/github/copilot.vim.git
 [submodule "pack/third_party/start/img-clip.nvim"]
 	path = pack/third_party/start/img-clip.nvim
