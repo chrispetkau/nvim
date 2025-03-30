@@ -78,7 +78,6 @@ function keymaps.install_roslyn_keymaps()
 end
 
 function keymaps.install_copilot_chat_keymaps()
-	-- vim.keymap.set('i', '<F1>', require('CopilotChat').trigger_complete, { desc = "Copilot Chat Trigger Completion" })
 	-- vim.keymap.set('i', '<Tab>', 'copilot#Accept("<Tab>")', { silent = true, expr = true, desc = "Copilot Chat Trigger Completion" })
 end
 
@@ -198,6 +197,9 @@ function keymaps.setup()
 
 	-- 'g'it keymaps
 	vim.keymap.set("n", "<leader>gl", util.git_log_author_date(), { desc = "One-line git log with author and date" })
+
+	-- CopilotChat keymaps
+	vim.keymap.set('', '<F1>', ':CopilotChatToggle<CR>', { desc = "Copilot Chat Toggle" })
 end
 
 return keymaps

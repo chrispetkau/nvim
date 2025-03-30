@@ -56,8 +56,7 @@ require("plugins.dressing").setup() -- UI improvements
 require("plugins.render_markdown").setup() -- Improved .md rendering
 require("plugins.img_clip").setup() -- Embed images in .md
 require("plugins.copilot_chat").setup() -- Chat with Copilot
-
-require('Comment').setup(require("keymaps").get_comment_plugin_setup_spec())
+require('plugins.comment').setup() -- Add/remove comments
 
 require('onedark').setup {
 	style = 'darker'
