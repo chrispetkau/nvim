@@ -23,6 +23,7 @@ function opts.setup()
 	-- local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 	-- vim.opt.rtp:prepend(lazypath)
 
+	-- TODO are we using nui? Is it causing warnings in checkhealth?
 	local resolved_home = vim.fn.expand("$HOME")
 	vim.opt.rtp:append(resolved_home .. "/AppData/Local/nvim/pack/third_party/start/nui.nvim")
 	vim.opt.rtp:append("C:/Users/Chris Petkau/AppData/Local/nvim/pack/third_party/start/nui.nvim")
@@ -50,13 +51,15 @@ function opts.setup()
 	vim.opt.foldenable = true
 	vim.opt.foldlevel = 99
 	vim.opt.foldlevelstart = 99
-	vim.opt.fillchars = 'fold: ,foldopen:,foldsep: ,foldclose:'
+	vim.opt.fillchars:append { fold = ' ', foldopen = '', foldsep = ' ', foldclose = '' }
 	vim.opt.foldcolumn = '1'
 
-	-- This from avante.nvim documentation. Setting it to 3 means the last window will always have a status line.
-	-- views can only be fully collapsed with the global statusline
-	-- TODO ugh, no. We want each window to have its own status line.
-	-- vim.opt.laststatus = 3
+	-- Set up the colors for the diff view.
+	vim.api.nvim_set_hl(0, "DiffAdd",    { bg = "Green",  fg = "NONE" })
+	vim.api.nvim_set_hl(0, "DiffChange", { bg = "Yellow", fg = "NONE" })
+	vim.api.nvim_set_hl(0, "DiffDelete", { bg = "Red",    fg = "NONE" })
+	vim.api.nvim_set_hl(0, "DiffText",   { bg = "Blue",   fg = "NONE" })
+	vim.opt.fillchars:append { diff = ' ' }
 end
 
 return opts
