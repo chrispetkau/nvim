@@ -60,14 +60,10 @@ function keymaps.get_comment_plugin_setup_spec()
 end
 
 function keymaps.install_fugitive_keymaps()
-	vim.api.nvim_buf_set_keymap(0, 'n', 'dv', 'O:Gdiffsplit<CR>', { noremap = false, silent = true })
-	-- vim.keymap.set("n", "dv", function()
-	-- 	local file = vim.fn.expand("<cfile>") -- Get the file under the cursor
-	-- 	if file ~= "" then
-	-- 		vim.cmd("tab Git diff " .. vim.fn.fnameescape(file)) -- Open in a new tab
-	-- 	end
-	-- end, { buffer = true, silent = true })
-	-- map('n', 'q', '<cmd>:tabclose<CR>', "Close Fugitive diffsplit tab")
+	vim.api.nvim_buf_set_keymap(0, 'n', 'dd', 'O:<C-U>call fugitive#DiffClose()<Bar>keepalt Gdiffsplit!<CR>', { noremap = false, silent = true })
+	vim.api.nvim_buf_set_keymap(0, 'n', 'dh', 'O:<C-U>call fugitive#DiffClose()<Bar>keepalt Ghdiffsplit!<CR>', { noremap = false, silent = true })
+	vim.api.nvim_buf_set_keymap(0, 'n', 'ds', 'O:<C-U>call fugitive#DiffClose()<Bar>keepalt Ghdiffsplit!<CR>', { noremap = false, silent = true })
+	vim.api.nvim_buf_set_keymap(0, 'n', 'dv', 'O:<C-U>call fugitive#DiffClose()<Bar>keepalt Gvdiffsplit!<CR>', { noremap = false, silent = true })
 end
 
 function keymaps.install_roslyn_keymaps()
@@ -117,7 +113,7 @@ end
 function keymaps.setup()
 	local util = require("util")
 
-	-- 'w'indow operation
+	-- wi'n'dow operation
 	vim.keymap.set("n", "<leader>n", "<C-w>", { desc = "Window operation" })
 
 	-- 'b'uffer
@@ -184,7 +180,9 @@ function keymaps.setup()
 	vim.keymap.set("", "<S-F11>", function() dap.step_out() end, { desc = "Step out" })
 	vim.keymap.set("", "<F7>", function() dap.repl.open() end, { desc = "Read-eval-print" })
 
-	-- TODO maybe remap page-up and page-down to <C-u> and <C-d> in normal mode.
+	-- Remap page-up and page-down to <C-u> and <C-d> in normal mode.
+	vim.keymap.set("n", "<PageUp>", "<C-u>", { desc = "Page up, half-page" })
+	vim.keymap.set("n", "<PageDown>", "<C-d>", { desc = "Page down, half-page" })
 
 	-- 'd'ebugger keymaps
 	local dapui = require("dapui")
