@@ -100,3 +100,6 @@
 [submodule "pack/third_party/start/nvim-treesitter-context"]
 	path = pack/third_party/start/nvim-treesitter-context
 	url = https://github.com/nvim-treesitter/nvim-treesitter-context.git
+[submodule "pack/third_party/start/nvim-tree.lua"]
+	path = pack/third_party/start/nvim-tree.lua
+	url = https://github.com/nvim-tree/nvim-tree.lua.git

@@ -11,6 +11,8 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
+require("plugins.tree").disable_netrw()
+
 require("opts").setup()
 
 vim.cmd([[
@@ -57,6 +59,7 @@ require("plugins.render_markdown").setup() -- Improved .md rendering
 require("plugins.img_clip").setup() -- Embed images in .md
 require("plugins.copilot_chat").setup() -- Chat with Copilot
 require('plugins.comment').setup() -- Add/remove comments
+require("plugins.tree").setup() -- File tree
 
 require('onedark').setup {
 	style = 'darker'

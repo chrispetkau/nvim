@@ -22,6 +22,7 @@ function opts.setup()
 	vim.opt.wrap = false
 	-- local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 	-- vim.opt.rtp:prepend(lazypath)
+	vim.opt.termguicolors = true -- enable 24-bit RGB colors
 
 	-- TODO are we using nui? Is it causing warnings in checkhealth?
 	local resolved_home = vim.fn.expand("$HOME")
