@@ -165,8 +165,8 @@ function keymaps.setup()
 	-- Ctrl-s to save.
 	vim.keymap.set("n", "<C-s>", ":w<CR>", { desc = "Save current buffer" })
 	vim.keymap.set("n", "<C-S-s>", ":wa<CR>", { desc = "Save all buffers" })
-	vim.keymap.set("i", "<C-s>", "<Esc>:w<CR>a", { desc = "Save current buffer" })
-	vim.keymap.set("i", "<C-S-s>", "<Esc>:wa<CR>a", { desc = "Save all buffers" })
+	vim.keymap.set("i", "<C-s>", "<Esc>:w<CR>", { desc = "Save current buffer" })
+	vim.keymap.set("i", "<C-S-s>", "<Esc>:wa<CR>", { desc = "Save all buffers" })
 
 	-- Standard chords for cut'n'paste from clipboard.
 	vim.keymap.set("v", "<C-c>", '"+y', { desc = "Copy clipboard" })
