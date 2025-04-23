@@ -144,7 +144,7 @@ function util.get_standard_directories()
 end
 
 function util.git_log_author_date()
-	return ':G log --pretty=format:"%h %ad | %an | %s" --date=format:"%Y-%m-%d %H:%M:%S"<CR>'
+	return ':G log --graph --all --decorate --pretty=format:"%h %ad | %an | %s" --date=format:"%Y-%m-%d %H:%M:%S"<CR>'
 end
 
 function util.reload_nvim_lua_file(filepath)

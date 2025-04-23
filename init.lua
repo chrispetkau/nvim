@@ -66,6 +66,9 @@ require('onedark').setup {
 }
 require('onedark').load()
 
+-- Set color of Copilot suggestions to help distinguish them.
+vim.api.nvim_set_hl(0, "CopilotSuggestion", { fg = "#8B0000" }) -- Dark red color
+
 -- Decrease font size a bit so we can fit 2 120-line windows side by side.
 vim.o.guifont = "Cascadia Code:h13:#h-slight"
 
