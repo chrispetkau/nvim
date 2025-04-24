@@ -62,7 +62,10 @@ require('plugins.comment').setup() -- Add/remove comments
 require("plugins.tree").setup() -- File tree
 
 require('onedark').setup {
-	style = 'darker'
+	style = 'darker',
+	highlights = {
+		["@comment"] = { fg = '#006400', italic = true }, -- Darker green for comments
+	},
 }
 require('onedark').load()
 
