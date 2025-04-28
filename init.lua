@@ -63,8 +63,14 @@ require("plugins.tree").setup() -- File tree
 
 require('onedark').setup {
 	style = 'darker',
-	highlights = {
-		["@comment"] = { fg = '#006400', italic = true }, -- Darker green for comments
+    highlights = {
+        ["@comment"] = { fg = '#006400', italic = true }, -- Darker green for comments
+        DiffAdd = { fg = '#00FF00', bg = '#003300' }, -- Added lines (general)
+        DiffChange = { fg = '#FFFF00', bg = '#333300' }, -- Changed lines (general)
+        DiffDelete = { fg = '#FF0000', bg = '#330000' }, -- Deleted lines (general)
+        DiffText = { fg = '#FFFFFF', bg = '#0000FF', bold = true }, -- Changed text within a changed line
+        DiffAdded = { fg = '#00FF00', bg = '#003300' }, -- Alternative for added lines
+        DiffRemoved = { fg = '#FF0000', bg = '#330000' }, -- Alternative for deleted lines
 	},
 }
 require('onedark').load()
