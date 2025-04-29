@@ -1,6 +1,14 @@
 local lspconfig = {}
 
 local function setup_lsp(client)
+	-- Configure diagnostics globally
+	vim.diagnostic.config({
+		virtual_text = true, -- Show diagnostics inline
+		signs = true,        -- Show signs in the gutter
+		update_in_insert = false,
+		underline = true,
+		severity_sort = true,
+	})
 	require("keymaps").set_lsp_keymappings(client)
 end
 
@@ -27,7 +35,7 @@ function lspconfig.setup()
 		settings = {
 			['rust-analyzer'] = {
 				diagnostics = {
-					enable = false
+					enable = false,
 				}
 			}
 		}
