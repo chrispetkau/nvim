@@ -206,8 +206,8 @@ function keymaps.setup()
 	vim.keymap.set('', '<F1>', ':CopilotChatToggle<CR>', { desc = "Copilot Chat Toggle" })
 
 	-- register tricks
-	vim.keymap.set("n", "<leader>p", '"0p', { desc = "Paste (after) latest yank" })
-	vim.keymap.set("n", "<leader>P", '"0P', { desc = "Paste (before) latest yank" })
+	vim.keymap.set({"n", "v"}, "<leader>p", '"0p', { desc = "Paste (after) latest yank" })
+	vim.keymap.set({"n", "v"}, "<leader>P", '"0P', { desc = "Paste (before) latest yank" })
 end
 
 return keymaps
