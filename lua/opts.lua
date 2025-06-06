@@ -61,6 +61,8 @@ function opts.setup()
 	vim.api.nvim_set_hl(0, "DiffDelete", { bg = "Red",    fg = "NONE" })
 	vim.api.nvim_set_hl(0, "DiffText",   { bg = "Blue",   fg = "NONE" })
 	vim.opt.fillchars:append { diff = ' ' }
+
+	vim.opt.mouse = ""
 end
 
 return opts
