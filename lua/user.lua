@@ -30,6 +30,7 @@ function user.get_project_directories()
 	local result = require("util").get_standard_directories()
 	local directories = {
 		user.get_klei_directory().."/oni/game/assets/scripts",
+		user.get_klei_directory().."/oni/game/assets/plugins/klei",
 		user.get_klei_directory().."/oni/game/assets/streamingassets/dlc/dlc4",
 		user.get_klei_directory().."/oni",
 	}
