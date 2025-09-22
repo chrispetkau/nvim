@@ -103,3 +103,6 @@
 [submodule "pack/third_party/start/nvim-tree.lua"]
 	path = pack/third_party/start/nvim-tree.lua
 	url = https://github.com/nvim-tree/nvim-tree.lua.git
+[submodule "pack/third_party/start/nvim-treesitter-textobjects"]
+	path = pack/third_party/start/nvim-treesitter-textobjects
+	url = https://github.com/nvim-treesitter/nvim-treesitter-textobjects.git

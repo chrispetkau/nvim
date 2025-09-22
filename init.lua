@@ -60,6 +60,7 @@ require("plugins.img_clip").setup() -- Embed images in .md
 require("plugins.copilot_chat").setup() -- Chat with Copilot
 require('plugins.comment').setup() -- Add/remove comments
 require("plugins.tree").setup() -- File tree
+require("plugins.treesitter_textobjects").setup() -- File tree
 
 require('onedark').setup {
 	style = 'darker',

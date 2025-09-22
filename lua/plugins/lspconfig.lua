@@ -27,6 +27,14 @@ function lspconfig.setup()
 			},
 		},
 	}
+	lspconfig_plugin.pylsp.setup {
+		on_attach = function(client)
+			setup_lsp(client)
+			vim.opt.foldtext = "v:lua.vim.lsp.foldtext()"
+		end,
+		settings = {
+		}
+	}
 	lspconfig_plugin.rust_analyzer.setup {
 		on_attach = function(client)
 			setup_lsp(client)
@@ -40,33 +48,59 @@ function lspconfig.setup()
 			}
 		}
 	}
-	require("roslyn").setup({
-		config = {
-			on_attach = function(client)
-				setup_lsp(client)
-				require('keymaps').install_roslyn_keymaps()
-			end,
-			settings = {
-				["csharp|inlay_hints"] = {
-					csharp_enable_inlay_hints_for_implicit_object_creation = true,
-					csharp_enable_inlay_hints_for_implicit_variable_types = true,
-					csharp_enable_inlay_hints_for_lambda_parameter_types = true,
-					csharp_enable_inlay_hints_for_types = true,
-					dotnet_enable_inlay_hints_for_indexer_parameters = true,
-					dotnet_enable_inlay_hints_for_literal_parameters = true,
-					dotnet_enable_inlay_hints_for_object_creation_parameters = true,
-					dotnet_enable_inlay_hints_for_other_parameters = true,
-					dotnet_enable_inlay_hints_for_parameters = true,
-					dotnet_suppress_inlay_hints_for_parameters_that_differ_only_by_suffix = true,
-					dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name = true,
-					dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent = true,
-				},
-				["csharp|code_lens"] = {
-					dotnet_enable_references_code_lens = true,
-				},
+	-- require("roslyn").setup({
+	-- 	config = {
+	-- 		on_attach = function(client)
+	-- 			setup_lsp(client)
+	-- 			require('keymaps').install_roslyn_keymaps()
+	-- 		end,
+	-- 		settings = {
+	-- 			["csharp|inlay_hints"] = {
+	-- 				csharp_enable_inlay_hints_for_implicit_object_creation = true,
+	-- 				csharp_enable_inlay_hints_for_implicit_variable_types = true,
+	-- 				csharp_enable_inlay_hints_for_lambda_parameter_types = true,
+	-- 				csharp_enable_inlay_hints_for_types = true,
+	-- 				dotnet_enable_inlay_hints_for_indexer_parameters = true,
+	-- 				dotnet_enable_inlay_hints_for_literal_parameters = true,
+	-- 				dotnet_enable_inlay_hints_for_object_creation_parameters = true,
+	-- 				dotnet_enable_inlay_hints_for_other_parameters = true,
+	-- 				dotnet_enable_inlay_hints_for_parameters = true,
+	-- 				dotnet_suppress_inlay_hints_for_parameters_that_differ_only_by_suffix = true,
+	-- 				dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name = true,
+	-- 				dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent = true,
+	-- 			},
+	-- 			["csharp|code_lens"] = {
+	-- 				dotnet_enable_references_code_lens = true,
+	-- 			},
+	-- 		},
+	-- 	},
+	-- })
+	vim.lsp.config["roslyn"] = {
+		on_attach = function(client)
+			setup_lsp(client)
+			require('keymaps').install_roslyn_keymaps()
+		end,
+		settings = {
+			["csharp|inlay_hints"] = {
+				csharp_enable_inlay_hints_for_implicit_object_creation = true,
+				csharp_enable_inlay_hints_for_implicit_variable_types = true,
+				csharp_enable_inlay_hints_for_lambda_parameter_types = true,
+				csharp_enable_inlay_hints_for_types = true,
+				dotnet_enable_inlay_hints_for_indexer_parameters = true,
+				dotnet_enable_inlay_hints_for_literal_parameters = true,
+				dotnet_enable_inlay_hints_for_object_creation_parameters = true,
+				dotnet_enable_inlay_hints_for_other_parameters = true,
+				dotnet_enable_inlay_hints_for_parameters = true,
+				dotnet_suppress_inlay_hints_for_parameters_that_differ_only_by_suffix = true,
+				dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name = true,
+				dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent = true,
+			},
+			["csharp|code_lens"] = {
+				dotnet_enable_references_code_lens = true,
 			},
 		},
-	})
+	}
+	vim.lsp.enable('roslyn')
 
 	vim.api.nvim_create_autocmd("LspAttach", {
 		callback = function(args)

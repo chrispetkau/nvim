@@ -142,32 +142,32 @@ function crates.setup()
 				prerelease = "  pre-release ",
 				yanked = "  yanked ",
 			},
-			cmp = {
-				enabled = false,
-				use_custom_kind = true,
-				kind_text = {
-					version = "Version",
-					feature = "Feature",
-				},
-				kind_highlight = {
-					version = "CmpItemKindVersion",
-					feature = "CmpItemKindFeature",
-				},
-			},
-			coq = {
-				enabled = false,
-				name = "crates.nvim",
-			},
+			-- cmp = {
+			-- 	enabled = false,
+			-- 	use_custom_kind = true,
+			-- 	kind_text = {
+			-- 		version = "Version",
+			-- 		feature = "Feature",
+			-- 	},
+			-- 	kind_highlight = {
+			-- 		version = "CmpItemKindVersion",
+			-- 		feature = "CmpItemKindFeature",
+			-- 	},
+			-- },
+			-- coq = {
+			-- 	enabled = false,
+			-- 	name = "crates.nvim",
+			-- },
 			crates = {
 				enabled = true,
 				min_chars = 3,
 				max_results = 8,
 			},
 		},
-		null_ls = {
-			enabled = false,
-			name = "crates.nvim",
-		},
+		-- null_ls = {
+		-- 	enabled = false,
+		-- 	name = "crates.nvim",
+		-- },
 		neoconf = {
 			enabled = false,
 			namespace = "crates",
