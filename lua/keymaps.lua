@@ -26,7 +26,7 @@ function keymaps.set_lsp_keymappings(client)
 	-- map('n', 'gW', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>', "Goto workspace symbol")
 
 	-- code 'a'ction
-	map('n', '<leader>ah', '<cmd>lua vim.lsp.buf.hover()<CR>', "Hover")
+	-- map('n', '<leader>ah', '<cmd>lua vim.lsp.buf.hover()<CR>', "Hover") -- unneeded as it is the same as <leader>K
 	map('n', '<leader>af', '<cmd>lua require("util").select_code_action()<CR>', "Code action")
 	map('n', '<leader>ar', '<cmd>lua vim.lsp.buf.rename()<CR>', "Rename")
 	map('n', '<leader>ai', '<cmd>lua vim.lsp.buf.incoming_calls()<CR>', "Incoming calls")
@@ -122,7 +122,12 @@ function keymaps.setup()
 	-- 'b'uffer
 	vim.keymap.set("n", "<leader>bo", ":%bd|e#|bd#<CR>", { desc = "Close all buffers except current" }) -- buffer only
 	vim.keymap.set("n", "<C-Tab>", "<C-^>", { desc = "Open most recent buffer" })
-	vim.keymap.set('n', "-d", ":bd<CR>", { desc = "Close buffer" })
+	vim.keymap.set('n', "<leader>bq", ":bd<CR>", { desc = "Close buffer" })
+
+	-- tab management 
+	vim.keymap.set('n', "<leader>tn", ":tabnew<CR>", { desc = "New tab" })
+	vim.keymap.set('n', "<leader>tq", ":tabc<CR>", { desc = "Close tab" })
+	vim.keymap.set('n', "<leader>to", ":tabo<CR>", { desc = "Close all tabs except current" }) -- tab only
 
 	-- 'f'ind keymaps.
 	local tb = require('telescope.builtin')
@@ -152,13 +157,9 @@ function keymaps.setup()
 	vim.keymap.set("n", "<C-\">", vim.diagnostic.goto_prev, { desc = "Goto previous error" })
 
 	-- 't'erminal
-	vim.keymap.set('n', "<leader>to", ":FloatermNew --name=myfloat --height=0.8 --width=0.7 --autoclose=2<CR> ")
-	vim.keymap.set('n', "<leader>tt", ":FloatermToggle myfloat<CR>")
-	vim.keymap.set('t', "<Esc>", "<C-\\><C-n>:q<CR>")
-
-	-- tab management 
-	vim.keymap.set('n', "<leader><Tab>", ":tabnew<CR>", { desc = "New tab" })
-	vim.keymap.set('n', "-v", ":tabc<CR>", { desc = "Close tab" })
+	-- vim.keymap.set('n', "<leader>to", ":FloatermNew --name=myfloat --height=0.8 --width=0.7 --autoclose=2<CR> ")
+	-- vim.keymap.set('n', "<leader>tt", ":FloatermToggle myfloat<CR>")
+	-- vim.keymap.set('t', "<Esc>", "<C-\\><C-n>:q<CR>")
 
 	vim.keymap.set('i', "<C-l>", "<Esc>:nohlsearch<CR>a", { desc = "Clear search highlights from Insert mode" })
 
@@ -190,7 +191,7 @@ function keymaps.setup()
 	-- 'd'ebugger keymaps
 	local dapui = require("dapui")
 	vim.keymap.set("n", "<leader>do", function() dapui.open() end, { desc = "Open debugger" })
-	vim.keymap.set("n", "<leader>dd", function() dapui.close() end, { desc = "Close debugger" })
+	vim.keymap.set("n", "<leader>dq", function() dapui.close() end, { desc = "Close debugger" })
 	vim.keymap.set("n", "<leader>dt", function() dapui.toggle() end, { desc = "Toggle debugger" })
 	vim.keymap.set("n", "<leader>ds", function() util.focus_dap_ui_element("DAP Scopes") end, { desc = "Focus DAP-UI Scopes" })
 	vim.keymap.set("n", "<leader>df", function() util.focus_dap_ui_element("DAP Stacks") end, { desc = "Focus DAP-UI Stacks" })
@@ -204,6 +205,16 @@ function keymaps.setup()
 
 	-- CopilotChat keymaps
 	vim.keymap.set('', '<F1>', ':CopilotChatToggle<CR>', { desc = "Copilot Chat Toggle" })
+
+	-- Copilot keymaps
+	vim.keymap.set("i", "<Esc>", function()
+		local copilot = require("copilot.suggestion")
+		if copilot.is_visible() then
+			copilot.dismiss()
+			return ""  -- Return empty string to stay in insert mode
+		end
+		return "<Esc>" -- Exit insert mode normally if no suggestion
+	end, { expr = true, buffer = true })
 
 	-- register tricks
 	vim.keymap.set({"n", "v"}, "<leader>p", '"0p', { desc = "Paste (after) latest yank" })
