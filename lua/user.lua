@@ -32,6 +32,7 @@ function user.get_project_directories()
 		user.get_klei_directory().."/oni/game/assets/scripts",
 		user.get_klei_directory().."/oni/game/assets/plugins/klei",
 		user.get_klei_directory().."/oni/game/assets/streamingassets/dlc/dlc4",
+		user.get_klei_directory().."/oni/tools/test_automation",
 		user.get_klei_directory().."/oni",
 	}
 	for _, directory in ipairs(directories) do
