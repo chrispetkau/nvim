@@ -11,6 +11,25 @@ function debugger.setup()
 	local vscode_extensions = require("user").get_vscode_extensions_directory()
 	local lua_dap_path = vscode_extensions..'klei.lua.debugger-1.0.0/'
 	local vstuc_path = vscode_extensions..'visualstudiotoolsforunity.vstuc-1.1.0/bin/'
+	local code_lldb_path = vscode_extensions..'vadimcn.vscode-lldb-1.9.2/adapter/'
+	dap.adapters.lldb = {
+		name = "lldb",
+		type = "executable",
+		command = code_lldb_path.."/codelldb.exe",
+		filetypes = {"rust"},
+	}
+	-- dap.configurations["codelldb-rs"] = {
+	-- 	{
+	-- 		name = "Debug jrpg_game",
+	-- 		type = "codelldb",
+	-- 		request = "launch",
+	-- 		cwd = "${workspaceFolder}",
+	-- 		stopOnEntry = false,
+	-- 		program = function()
+	-- 			return vim.fn.getcwd().."/target/debug/jrpg_game".."-F dev"
+	-- 		end,
+	-- 	},
+	-- }
 	dap.adapters.lua = {
 		type = "executable",
 		command = lua_dap_path.."/DebugAdapter.exe",
@@ -32,7 +51,7 @@ function debugger.setup()
 			env= {}
 		},
 	}
-	dap.adapters.vstuc        = {
+	dap.adapters.vstuc = {
 		type = 'executable',
 		command = 'dotnet',
 		args = { vstuc_path .. 'UnityDebugAdapter.dll' },
