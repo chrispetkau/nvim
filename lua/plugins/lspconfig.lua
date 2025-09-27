@@ -44,7 +44,10 @@ function lspconfig.setup()
 			['rust-analyzer'] = {
 				diagnostics = {
 					enable = false,
-				}
+				},
+				check = {
+					command = "clippy",
+				},
 			}
 		}
 	}
