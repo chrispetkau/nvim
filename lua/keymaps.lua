@@ -173,6 +173,8 @@ function keymaps.setup()
 	vim.keymap.set("v", "<C-c>", '"+y', { desc = "Copy clipboard" })
 	vim.keymap.set("v", "<C-x>", '"+d', { desc = "Cut clipboard" })
 	vim.keymap.set({"n", "v"}, "<C-p>", '"+p', { desc = "Paste clipboard" }) -- Don't use <C-v> as that is Visual Block.
+	vim.keymap.set("n", "<C-a>", 'gg<S-v>G', { desc = "Select all" })
+	vim.keymap.set({"v", "i"}, "<C-a>", '<Esc>gg<S-v>G', { desc = "Select all" })
 
 	-- VisualStudio-style debugging keymaps
 	local dap = require("dap")
